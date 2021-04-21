@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%;">
+<head>
+    <meta charset="UTF-8">
+    <title>Warehouse control</title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+    <h1>Warehouse control panel</h1>
+
+    <h3>Incomplete Orders - Stock</h3>
+
+    <div id="shelveInfo">
+       <div class="card">
+           <div class="card-header">Shelf info</div>
+           <div class="card-body">
+            <h5 class="card-title">Shelf ID: <div id="shelveInfoID" class="text_insidecard">0</div></h5>
+
+            <p class="card-text" style="width:fit-content; height: fit-content;display: inline;">
+                Orders to be collected:
+               <div id="shelveInfoOrders" class="text_insidecard">0</div>
+            </p>
+
+            <p class="card-text" style="width:fit-content; height: fit-content;display: inline;">
+                Current stock: <div id="shelveInfoStock" class="text_insidecard">0</div>
+            </p>
+
+            <a class="btn btn-primary">Create order</a>
+
+         </div>
+       </div>
+    </div>
+
+    <div id="container_shelves"></div>
+
+</body>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/shelves.js"></script>
+<script src="js/shelve_panel.js"></script>
+
+</html>
