@@ -5,13 +5,24 @@ body{
     text-align: center;
 }
 
+#main{
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    display: grid;
+    grid-template-columns: 20% 60% 20%;
+    grid-template-areas: "legend map orders"
+                         "info map orders";
+}
+
 
 #container_shelves{
-    width: 60%;
+    width: 100%;
     height: 100%;
     text-align: center;
     display: inline-block;
     margin-top: 30px;
+    grid-area: map;
 }
 
 .sub_container_shelves{
@@ -44,16 +55,63 @@ body{
 
 #shelveInfo{
     display: none;
-    position: fixed;
+    position: inherit;
     overflow: visible;
     z-index: 100;
-    width: 15%;
+    width: 100%;
     height: 10%;
     margin: 10px;
+    grid-area: info;
+}
+
+#shelveLegend{
+    display: block;
+    position: inherit;
+    overflow: visible;
+    z-index: 100;
+    width: 100%;
+    height: 10%;
+    margin: 10px;
+    grid-area: legend;
 }
 
 .text_insidecard{
     width: fit-content;
     height: fit-content;
     display: inline;
+}
+
+#ordersList{
+    display: block;
+    position: inherit;
+    overflow: visible;
+    z-index: 100;
+    width: 100%;
+    height: 10%;
+    margin: 10px;
+    padding-right: 10px;
+    grid-area: orders;
+}
+
+.legend_element{
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    vertical-align: middle;
+    align-items: stretch;
+}
+
+#ul_legend{
+    padding: 3%;
+    align-items: center;
+    display: grid;
+    grid-template-rows: 20% 20% 20% 20% 20%;
+    grid-template-columns: 20% 80%;
+    grid-template-areas: "color1 legend1"
+                         "color2 legend2"
+                         "color3 legend3"
+                         "color4 legend4"
+                         "color5 legend5";
 }
