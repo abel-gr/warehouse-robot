@@ -1,7 +1,7 @@
 
 var totalShelves = 72;
 var shelvesPerRow = 6;
-var shelvesPerCorridor = 4;
+var shelvesPerCorridor = 3;
 
 const e1 = "#42f56f";
 const e2 = "#ebcc42";
