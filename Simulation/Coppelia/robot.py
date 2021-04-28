@@ -24,13 +24,25 @@ class Image:
 
 
 class Sensors:
-    def __init__(self, clientID, cam):
+    def __init__(self, clientID, cam, psensor):
         self.clientID = clientID
         self.cam = cam
+        self.psensor = psensor
 
+        print(psensor)
     def getImage(self):
         retCode, res, image = simxGetVisionSensorImage(self.clientID, self.cam, 0, simx_opmode_oneshot_wait)
         return Image(image, res)
+
+    def getDistance(self):
+        retCode, detectionState, detectedPoint, detectedObjectHandle, detectedSurfaceNormalVector = simxReadProximitySensor(
+            self.clientID, self.psensor, simx_opmode_blocking)
+        print (retCode)
+        if detectionState == True:
+            sensor_val = np.linalg.norm(detectedPoint)
+            print("distacia al objeto: ", sensor_val)
+        else:
+            print("No ha detectado objeto")
 
 
 class Legs:
@@ -107,7 +119,7 @@ class Brain:  # It will be the main class where all the other class will be conn
         self.clientID = connect(19999)
         assert self.clientID != -1
 
-        ret_codes = np.zeros(10)
+        ret_codes = np.zeros(11)
         ret_codes[0], self.obj = simxGetObjectHandle(self.clientID, 'Robot', simx_opmode_blocking)
         ret_codes[1], self.base = simxGetObjectHandle(self.clientID, 'Base_joint', simx_opmode_blocking)
         ret_codes[2], self.shoulder = simxGetObjectHandle(self.clientID, 'Shoulder_joint', simx_opmode_blocking)
@@ -118,11 +130,12 @@ class Brain:  # It will be the main class where all the other class will be conn
         ret_codes[7], self.wrist = simxGetObjectHandle(self.clientID, 'Wrist_joint', simx_opmode_blocking)
         ret_codes[8], self.cam = simxGetObjectHandle(self.clientID, 'Vision_sensor', simx_opmode_blocking)
         ret_codes[9], self.pad = simxGetObjectHandle(self.clientID, 'suctionPad', simx_opmode_blocking)
+        ret_codes[10], self.psensor = simxGetObjectHandle(self.clientID, 'Psensor', simx_opmode_blocking)
         assert not all(ret_codes)
 
         self.arm = Arm(self.clientID, self.base, self.shoulder, self.elbow, self.wrist, self.arm_tip)
         self.legs = Legs(self.clientID, self.left_wheel, self.right_wheel)
-        self.sensors = Sensors(self.clientID, self.cam)
+        self.sensors = Sensors(self.clientID, self.cam, self.psensor)
 
         print("Initialization completed, connection established")
 
