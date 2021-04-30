@@ -4,34 +4,40 @@ using UnityEngine;
 
 public class Robot : MonoBehaviour
 {
-
+    public int robotID = -1;
     Vector3 positionB;
-    int robotSpeed = 2;
+    public int robotSpeed = 5;
+    public float rotateSpeed = 30;
 
-    Warehouse_node[] nodos;
+    public OptimalRoute optimalRoute;
 
-    void getAllNodes()
-    {
-        nodos = FindObjectsOfType(typeof(Warehouse_node)) as Warehouse_node[];
-        Debug.Log(nodos.Length + " nodos encontrados en el almacen");
+    public float Yrotation = 0;
+    public float targetYrotation = 50;
+
+    public Warehouse warehouse;
+
+    public int closestNodeArrived = -1;
+    public int TargetNodeID = -1;
+
+    public int containerCapacity = 5; // Total number of boxes that robot can store in its container
+    public int containerFilled = 0; // Number of boxes that are in the robot container
+
+    public enum RobotStates{
+        Available, OnWayToPick, PickingUp, OnWayToDrop
     }
 
+    public RobotStates RobotState = RobotStates.Available;
 
     void Start()
     {
         positionB = transform.position;
 
-        getAllNodes();
+        Yrotation = transform.eulerAngles.y;
 
-        ArrayList r = new ArrayList();
-        r.Add(2);
-        r.Add(5);
-        r.Add(1);
-        r.Add(8);
-        createNewRoute(r);
+        //warehouse = FindObjectOfType(typeof(Warehouse)) as Warehouse;
     }
 
-    Vector2 get2dvectortransform(Vector3 v3)
+    public Vector2 get2dvectortransform(Vector3 v3)
     {
         Vector2 v;
         v.x = v3.x;
@@ -40,17 +46,13 @@ public class Robot : MonoBehaviour
         return v;
     }
 
-    void gotoClosestNode()
+    public void gotoClosestNode()
     {
         float mindist = -1;
         Warehouse_node closestNode = null;
 
-        int i = 0;
-        foreach (Warehouse_node node2 in nodos)
+        foreach (Warehouse_node node2 in warehouse.nodos)
         {
-            node2.nodeID = i;
-            i++;
-
             float dist = Vector2.Distance(get2dvectortransform(transform.position), get2dvectortransform(node2.transform.position));
 
             if (closestNode == null || dist < mindist)
@@ -62,7 +64,9 @@ public class Robot : MonoBehaviour
 
         positionB = closestNode.transform.position;
 
-        Debug.Log("En camino al nodo mas cercano: " + closestNode.transform.position);
+        closestNodeArrived = closestNode.nodeID;
+
+        //Debug.Log("En camino al nodo mas cercano: " + closestNode.transform.position);
     }
 
     bool wayToClosestNode = false;
@@ -85,7 +89,9 @@ public class Robot : MonoBehaviour
 
                 positionB = node.transform.position;
 
-                Debug.Log("En camino al nodo ubicado en: " + node.transform.position);
+                TargetNodeID = node.nodeID;
+
+                //Debug.Log("En camino al nodo ubicado en: " + node.transform.position);
             }
         }
     }
@@ -107,7 +113,7 @@ public class Robot : MonoBehaviour
             {
                 if (i >= lastRoutePositionVisited)
                 {
-                    gotoNode(nodos[n]);
+                    gotoNode(warehouse.nodos[n]);
                     Debug.LogWarning("Camino al nodo " + n + " en la posicion de la ruta num " + i);
                     break;
                 }
@@ -116,24 +122,94 @@ public class Robot : MonoBehaviour
         }
     }
 
-    ArrayList nodeRoute;
+    ArrayList nodeRoute = new ArrayList();
 
-    void createNewRoute(ArrayList r)
+    public void createNewRoute(ArrayList r)
     {
         lastRoutePositionVisited = -1;
         nodeRoute = r;
+    }
+
+    void calculateTargetYrotation(Vector3 tow)
+    {
+        /*int x = (int)tow.x;
+        int z = (int)tow.z;
+
+        int x2 = (int)transform.localPosition.x;
+        int z2 = (int)transform.localPosition.z;
+
+        targetYrotation = Yrotation;
+        if (x > x2)
+        {
+            targetYrotation = 90;
+        }
+        else if (x < x2)
+        {
+            targetYrotation = -90;
+        }
+        else if (z > z2)
+        {
+            targetYrotation = 0;
+        }
+        else if (z < z2)
+        {
+            targetYrotation = 180;
+        }*/
+
+        Vector2 v2 = get2dvectortransform(transform.position);
+        float a = Vector2.Angle(Vector2.right, get2dvectortransform(positionB) - v2) + 90;
+
+        targetYrotation = (int)a;
+
+        if(targetYrotation > 360)
+        {
+            targetYrotation -= 360;
+        }
+
+        if(targetYrotation < 0)
+        {
+            targetYrotation += 360;
+        }
     }
 
     void Update()
     {
         if (Vector2.Distance(get2dvectortransform(transform.position), get2dvectortransform(positionB)) <= Time.deltaTime * robotSpeed * 2)
         {
+            if (TargetNodeID != -1)
+            {
+                closestNodeArrived = TargetNodeID;
+                TargetNodeID = -1;
+            }
+
+            if(lastRoutePositionVisited > nodeRoute.Count)
+            {
+                //Debug.Log("Robot #" + robotID + " arrived to the end of its route " + closestNodeArrived);
+                RobotState = RobotStates.Available;
+            }
+
             goToRoute(nodeRoute);
             lastRoutePositionVisited++;
         }
         else
         {
-            transform.localPosition = Vector3.MoveTowards(transform.localPosition, positionB, Time.deltaTime * robotSpeed);
+            Vector3 tow = Vector3.MoveTowards(transform.localPosition, positionB, Time.deltaTime * robotSpeed);
+
+            calculateTargetYrotation(tow);
+
+            if(((int)targetYrotation != (int)Yrotation) && ((int)targetYrotation + 1 != (int)Yrotation) && ((int)targetYrotation - 1 != (int)Yrotation))
+            {
+                Quaternion newRotation = Quaternion.Euler(0, targetYrotation, 0);
+
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, newRotation, rotateSpeed * Time.deltaTime);
+
+                Yrotation = transform.rotation.eulerAngles.y;
+            }
+            else
+            {
+                transform.localPosition = tow;
+            }
+            
         }
     }
 
