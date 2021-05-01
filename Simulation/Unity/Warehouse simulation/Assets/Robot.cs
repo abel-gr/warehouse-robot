@@ -22,6 +22,8 @@ public class Robot : MonoBehaviour
     public int containerCapacity = 5; // Total number of boxes that robot can store in its container
     public int containerFilled = 0; // Number of boxes that are in the robot container
 
+    public bool rightSensorCollision = false;
+
     public enum RobotStates{
         Available, OnWayToPick, PickingUp, OnWayToDrop
     }
@@ -103,8 +105,8 @@ public class Robot : MonoBehaviour
 
         if (lastRoutePositionVisited == -1)
         {
-            wayToClosestNode = true;
-            gotoClosestNode();
+            //wayToClosestNode = true;
+            //gotoClosestNode();
         }
         else if(lastRoutePositionVisited < nodesToVisit.Count)
         {
@@ -161,15 +163,28 @@ public class Robot : MonoBehaviour
 
         targetYrotation = (int)a;
 
-        if(targetYrotation > 360)
+        if (targetYrotation > 360)
         {
             targetYrotation -= 360;
         }
 
-        if(targetYrotation < 0)
+        if (targetYrotation < 0)
         {
             targetYrotation += 360;
         }
+
+        if (positionB.z > transform.position.z)
+        {
+            if (targetYrotation < -177 && targetYrotation > -183)
+            {
+                targetYrotation += 180;
+            }
+            else if (targetYrotation > 177 && targetYrotation < 183)
+            {
+                targetYrotation -= 180;
+            }
+        }
+
     }
 
     void Update()
@@ -203,23 +218,18 @@ public class Robot : MonoBehaviour
 
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, newRotation, rotateSpeed * Time.deltaTime);
 
-                Yrotation = transform.rotation.eulerAngles.y;
             }
             else
             {
-                transform.localPosition = tow;
+                if (!rightSensorCollision)
+                {
+                    transform.localPosition = tow;
+                }
             }
-            
+
+            Yrotation = transform.rotation.eulerAngles.y;
+
         }
-    }
-
-
-    void OnCollisionEnter(Collision collision)
-    {
-        ContactPoint contact = collision.GetContact(0);
-        Quaternion rotation = Quaternion.FromToRotation(Vector3.up, contact.normal);
-        Vector3 position = contact.point;
-        Collider collider = collision.collider;
     }
 
 }

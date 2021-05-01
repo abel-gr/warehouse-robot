@@ -44,18 +44,18 @@ public class Warehouse_orders : MonoBehaviour
 
     void assignRobot()
     {
-        foreach (OrderInfo n in globalOrders)
+        foreach (Warehouse_shelf n in shelves)
         {
-            Warehouse_node nodo = n.node;
-            int order_quantity = n.quantity;
+            Warehouse_node nodo = n.node1;
+            int order_quantity = n.products_to_pick;
 
             if (order_quantity > 0)
             {
                 foreach (Robot r in warehouse.robots)
                 {
-                    if (r.RobotState == Robot.RobotStates.Available)
+                    if (r.RobotState == Robot.RobotStates.Available && r.containerFilled < r.containerCapacity)
                     {
-                        order_quantity = n.quantity;
+                        order_quantity = n.products_to_pick;
                         if (order_quantity > 0)
                         {
                             int canPickup = r.containerCapacity - r.containerFilled;
@@ -65,18 +65,20 @@ public class Warehouse_orders : MonoBehaviour
                             if (order_quantity > canPickup)
                             {
                                 quantityToPickup = canPickup;
-                                n.quantity = order_quantity - canPickup;
+                                n.products_to_pick = order_quantity - canPickup;
                             }
                             else if (order_quantity == canPickup)
                             {
                                 quantityToPickup = canPickup;
-                                n.quantity = 0;
+                                n.products_to_pick = 0;
                             }
                             else
                             {
                                 quantityToPickup = order_quantity;
-                                n.quantity = 0;
+                                n.products_to_pick = 0;
                             }
+
+                            n.products -= quantityToPickup;
 
                             r.containerFilled += quantityToPickup;
 

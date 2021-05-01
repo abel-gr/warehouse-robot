@@ -7,6 +7,9 @@ public class Warehouse_node : MonoBehaviour
 
     public int nodeID = -1;
 
+    public bool directionX = true;
+    public bool directionZ = false;
+
     public int Edge1 = -1;
     public int Edge2 = -1;
     public int Edge3 = -1;

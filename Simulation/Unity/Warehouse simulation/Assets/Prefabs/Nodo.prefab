@@ -59,6 +59,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nodeID: -1
+  directionX: 1
+  directionZ: 0
   Edge1: -1
   Edge2: -1
   Edge3: -1

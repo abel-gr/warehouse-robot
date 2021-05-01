@@ -26,7 +26,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: -1
-  unpicked_orders: 0
+  products: 0
+  products_to_pick: 0
   node1: {fileID: 1253974757436791275}
   node2: {fileID: 8811739104639060028}
   warehouse_orders: {fileID: 0}
@@ -95,6 +96,21 @@ PrefabInstance:
     - target: {fileID: 8617756456092247956, guid: 7957118cbaaaebd48be4db7f0b480997,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7613399618350769069, guid: 7957118cbaaaebd48be4db7f0b480997,
+        type: 3}
+      propertyPath: direction
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7613399618350769069, guid: 7957118cbaaaebd48be4db7f0b480997,
+        type: 3}
+      propertyPath: directionZ
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7613399618350769069, guid: 7957118cbaaaebd48be4db7f0b480997,
+        type: 3}
+      propertyPath: directionX
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -277,6 +293,16 @@ PrefabInstance:
     - target: {fileID: 8617756456092247956, guid: 7957118cbaaaebd48be4db7f0b480997,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7613399618350769069, guid: 7957118cbaaaebd48be4db7f0b480997,
+        type: 3}
+      propertyPath: directionX
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7613399618350769069, guid: 7957118cbaaaebd48be4db7f0b480997,
+        type: 3}
+      propertyPath: directionZ
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -64,6 +64,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   warehouse: {fileID: 1304546508916406490}
+  shelves: []
+  robotsReady: 0
 --- !u!1001 &2540474498120564891
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -137,6 +139,16 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 639289943536349027, guid: d635e1c68da17d1419170b5e0ffbb18a,
+        type: 3}
+      propertyPath: RowID
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 414862523821661311, guid: d635e1c68da17d1419170b5e0ffbb18a,
+        type: 3}
+      propertyPath: RowID
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 853036980520727375, guid: d635e1c68da17d1419170b5e0ffbb18a,
         type: 3}
       propertyPath: RowID
       value: 2
@@ -226,6 +238,16 @@ PrefabInstance:
       propertyPath: RowID
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 414862523821661311, guid: d635e1c68da17d1419170b5e0ffbb18a,
+        type: 3}
+      propertyPath: RowID
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 853036980520727375, guid: d635e1c68da17d1419170b5e0ffbb18a,
+        type: 3}
+      propertyPath: RowID
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d635e1c68da17d1419170b5e0ffbb18a, type: 3}
 --- !u!4 &4260488007204950332 stripped
@@ -311,6 +333,16 @@ PrefabInstance:
       propertyPath: RowID
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 414862523821661311, guid: d635e1c68da17d1419170b5e0ffbb18a,
+        type: 3}
+      propertyPath: RowID
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 853036980520727375, guid: d635e1c68da17d1419170b5e0ffbb18a,
+        type: 3}
+      propertyPath: RowID
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d635e1c68da17d1419170b5e0ffbb18a, type: 3}
 --- !u!4 &3307368682084128700 stripped
@@ -392,6 +424,16 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 639289943536349027, guid: d635e1c68da17d1419170b5e0ffbb18a,
+        type: 3}
+      propertyPath: RowID
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 414862523821661311, guid: d635e1c68da17d1419170b5e0ffbb18a,
+        type: 3}
+      propertyPath: RowID
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 853036980520727375, guid: d635e1c68da17d1419170b5e0ffbb18a,
         type: 3}
       propertyPath: RowID
       value: 8
