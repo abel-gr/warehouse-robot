@@ -1,0 +1,377 @@
+{
+  "information" : {
+    "state" : 0
+  },
+  "shelves" : {
+    "sections" : {
+      "section1" : {
+        "shelf1" : {
+          "incomplete_orders" : 0,
+          "orderState" : 0,
+          "stock" : 2
+        },
+        "shelf10" : {
+          "incomplete_orders" : 5,
+          "orderState" : 0,
+          "stock" : 0
+        },
+        "shelf11" : {
+          "incomplete_orders" : 7,
+          "orderState" : 0,
+          "stock" : 5
+        },
+        "shelf12" : {
+          "incomplete_orders" : 0,
+          "orderState" : 0,
+          "stock" : 10
+        },
+        "shelf13" : {
+          "incomplete_orders" : 0,
+          "orderState" : 0,
+          "stock" : 10
+        },
+        "shelf14" : {
+          "incomplete_orders" : 0,
+          "orderState" : 0,
+          "stock" : 10
+        },
+        "shelf15" : {
+          "incomplete_orders" : 1,
+          "orderState" : 0,
+          "stock" : 12
+        },
+        "shelf16" : {
+          "incomplete_orders" : 0,
+          "orderState" : 0,
+          "stock" : 5
+        },
+        "shelf17" : {
+          "incomplete_orders" : 0,
+          "orderState" : 0,
+          "stock" : 20
+        },
+        "shelf18" : {
+          "incomplete_orders" : 2,
+          "orderState" : 0,
+          "stock" : 20
+        },
+        "shelf2" : {
+          "incomplete_orders" : 0,
+          "orderState" : 0,
+          "stock" : 2
+        },
+        "shelf3" : {
+          "incomplete_orders" : 0,
+          "orderState" : 0,
+          "stock" : 7
+        },
+        "shelf4" : {
+          "incomplete_orders" : 0,
+          "orderState" : 0,
+          "stock" : 10
+        },
+        "shelf5" : {
+          "incomplete_orders" : 0,
+          "orderState" : 0,
+          "stock" : 10
+        },
+        "shelf6" : {
+          "incomplete_orders" : 0,
+          "orderState" : 0,
+          "stock" : 10
+        },
+        "shelf7" : {
+          "incomplete_orders" : 0,
+          "orderState" : 0,
+          "stock" : 10
+        },
+        "shelf8" : {
+          "incomplete_orders" : 0,
+          "orderState" : 0,
+          "stock" : 10
+        },
+        "shelf9" : {
+          "incomplete_orders" : 0,
+          "orderState" : 0,
+          "stock" : 0
+        }
+      },
+      "section2" : {
+        "shelf1" : {
+          "incomplete_orders" : 0,
+          "orderState" : 0,
+          "stock" : 0
+        },
+        "shelf10" : {
+          "incomplete_orders" : 1,
+          "orderState" : 0,
+          "stock" : 2
+        },
+        "shelf11" : {
+          "incomplete_orders" : 0,
+          "orderState" : 0,
+          "stock" : 10
+        },
+        "shelf12" : {
+          "incomplete_orders" : 0,
+          "orderState" : 0,
+          "stock" : 10
+        },
+        "shelf13" : {
+          "incomplete_orders" : 0,
+          "orderState" : 0,
+          "stock" : 10
+        },
+        "shelf14" : {
+          "incomplete_orders" : 0,
+          "orderState" : 0,
+          "stock" : 8
+        },
+        "shelf15" : {
+          "incomplete_orders" : 0,
+          "orderState" : 0,
+          "stock" : 10
+        },
+        "shelf16" : {
+          "incomplete_orders" : 2,
+          "orderState" : 0,
+          "stock" : 10
+        },
+        "shelf17" : {
+          "incomplete_orders" : 0,
+          "orderState" : 0,
+          "stock" : 5
+        },
+        "shelf18" : {
+          "incomplete_orders" : 0,
+          "orderState" : 0,
+          "stock" : 10
+        },
+        "shelf2" : {
+          "incomplete_orders" : 0,
+          "orderState" : 0,
+          "stock" : 10
+        },
+        "shelf3" : {
+          "incomplete_orders" : 0,
+          "orderState" : 0,
+          "stock" : 10
+        },
+        "shelf4" : {
+          "incomplete_orders" : 3,
+          "orderState" : 0,
+          "stock" : 3
+        },
+        "shelf5" : {
+          "incomplete_orders" : 0,
+          "orderState" : 0,
+          "stock" : 10
+        },
+        "shelf6" : {
+          "incomplete_orders" : 0,
+          "orderState" : 0,
+          "stock" : 10
+        },
+        "shelf7" : {
+          "incomplete_orders" : 0,
+          "orderState" : 0,
+          "stock" : 4
+        },
+        "shelf8" : {
+          "incomplete_orders" : 1,
+          "orderState" : 0,
+          "stock" : 2
+        },
+        "shelf9" : {
+          "incomplete_orders" : 1,
+          "orderState" : 0,
+          "stock" : 1
+        }
+      },
+      "section3" : {
+        "shelf1" : {
+          "incomplete_orders" : 0,
+          "orderState" : 0,
+          "stock" : 0
+        },
+        "shelf10" : {
+          "incomplete_orders" : 0,
+          "orderState" : 0,
+          "stock" : 0
+        },
+        "shelf11" : {
+          "incomplete_orders" : 1,
+          "orderState" : 0,
+          "stock" : 2
+        },
+        "shelf12" : {
+          "incomplete_orders" : 0,
+          "orderState" : 0,
+          "stock" : 21
+        },
+        "shelf13" : {
+          "incomplete_orders" : 0,
+          "orderState" : 0,
+          "stock" : 10
+        },
+        "shelf14" : {
+          "incomplete_orders" : 0,
+          "orderState" : 0,
+          "stock" : 10
+        },
+        "shelf15" : {
+          "incomplete_orders" : 0,
+          "orderState" : 0,
+          "stock" : 10
+        },
+        "shelf16" : {
+          "incomplete_orders" : 0,
+          "orderState" : 0,
+          "stock" : 10
+        },
+        "shelf17" : {
+          "incomplete_orders" : 0,
+          "orderState" : 0,
+          "stock" : 14
+        },
+        "shelf18" : {
+          "incomplete_orders" : 1,
+          "orderState" : 0,
+          "stock" : 10
+        },
+        "shelf2" : {
+          "incomplete_orders" : 0,
+          "orderState" : 0,
+          "stock" : 10
+        },
+        "shelf3" : {
+          "incomplete_orders" : 0,
+          "orderState" : 0,
+          "stock" : 10
+        },
+        "shelf4" : {
+          "incomplete_orders" : 0,
+          "orderState" : 0,
+          "stock" : 5
+        },
+        "shelf5" : {
+          "incomplete_orders" : 0,
+          "orderState" : 0,
+          "stock" : 8
+        },
+        "shelf6" : {
+          "incomplete_orders" : 0,
+          "orderState" : 0,
+          "stock" : 50
+        },
+        "shelf7" : {
+          "incomplete_orders" : 0,
+          "orderState" : 0,
+          "stock" : 7
+        },
+        "shelf8" : {
+          "incomplete_orders" : 0,
+          "orderState" : 0,
+          "stock" : 10
+        },
+        "shelf9" : {
+          "incomplete_orders" : 2,
+          "orderState" : 0,
+          "stock" : 10
+        }
+      },
+      "section4" : {
+        "shelf1" : {
+          "incomplete_orders" : 0,
+          "orderState" : 0,
+          "stock" : 10
+        },
+        "shelf10" : {
+          "incomplete_orders" : 0,
+          "orderState" : 0,
+          "stock" : 10
+        },
+        "shelf11" : {
+          "incomplete_orders" : 0,
+          "orderState" : 0,
+          "stock" : 10
+        },
+        "shelf12" : {
+          "incomplete_orders" : 0,
+          "orderState" : 0,
+          "stock" : 10
+        },
+        "shelf13" : {
+          "incomplete_orders" : 1,
+          "orderState" : 0,
+          "stock" : 10
+        },
+        "shelf14" : {
+          "incomplete_orders" : 0,
+          "orderState" : 0,
+          "stock" : 10
+        },
+        "shelf15" : {
+          "incomplete_orders" : 0,
+          "orderState" : 0,
+          "stock" : 8
+        },
+        "shelf16" : {
+          "incomplete_orders" : 0,
+          "orderState" : 0,
+          "stock" : 8
+        },
+        "shelf17" : {
+          "incomplete_orders" : 0,
+          "orderState" : 0,
+          "stock" : 9
+        },
+        "shelf18" : {
+          "incomplete_orders" : 0,
+          "orderState" : 0,
+          "stock" : 10
+        },
+        "shelf2" : {
+          "incomplete_orders" : 0,
+          "orderState" : 0,
+          "stock" : 1
+        },
+        "shelf3" : {
+          "incomplete_orders" : 0,
+          "orderState" : 0,
+          "stock" : 10
+        },
+        "shelf4" : {
+          "incomplete_orders" : 0,
+          "orderState" : 0,
+          "stock" : 7
+        },
+        "shelf5" : {
+          "incomplete_orders" : 0,
+          "orderState" : 0,
+          "stock" : 33
+        },
+        "shelf6" : {
+          "incomplete_orders" : 1,
+          "orderState" : 0,
+          "stock" : 2
+        },
+        "shelf7" : {
+          "incomplete_orders" : 0,
+          "orderState" : 0,
+          "stock" : 1
+        },
+        "shelf8" : {
+          "incomplete_orders" : 1,
+          "orderState" : 0,
+          "stock" : 0
+        },
+        "shelf9" : {
+          "incomplete_orders" : 0,
+          "orderState" : 0,
+          "stock" : 0
+        }
+      }
+    }
+  }
+}

@@ -47,6 +47,14 @@ public class Warehouse_orders : MonoBehaviour
         foreach (Warehouse_shelf n in shelves)
         {
             Warehouse_node nodo = n.node1;
+            bool shelf_node_p = true;
+
+            if (Random.Range(0, 100) > 50)
+            {
+                nodo = n.node2;
+                shelf_node_p = false;
+            }
+
             int order_quantity = n.products_to_pick;
 
             if (order_quantity > 0)
@@ -81,6 +89,9 @@ public class Warehouse_orders : MonoBehaviour
                             n.products -= quantityToPickup;
 
                             r.containerFilled += quantityToPickup;
+
+                            r.shelf_target = n;
+                            r.shelf_node_p = shelf_node_p;
 
                             warehouse.setRobotRoute(r.robotID, -1, nodo.nodeID);
                             r.RobotState = Robot.RobotStates.OnWayToPick;
