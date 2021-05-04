@@ -25,7 +25,12 @@
                             You can give instructions to the robots using your voice to pick up orders or perform actions around the warehouse.
                         </p>
 
-                        <button id="clickToTalk" type="button" class="btn btn-primary">Click to start talking</button>
+                        <div id="controls">
+                            <button id="recordButton" type="button" class="btn btn-primary">Click to start talking</button>
+  	                        <button id="stopButton" type="button" class="btn btn-primary" disabled>Stop</button>
+                        </div>
+                        <br>
+                        	<ol id="recordingsList"></ol>
 
                     </div>
                 </div>
@@ -206,5 +211,6 @@
 <script src="js/pending_orders.js"></script>
 <script src="js/createOrder.js"></script>
 <script src="js/speech_to_text.js"></script>
+<script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
 
 </html>

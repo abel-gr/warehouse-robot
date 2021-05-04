@@ -13,7 +13,8 @@ body{
     grid-template-columns: 20% 60% 20%;
     grid-template-rows: 25% 35% 40%;
     grid-template-areas: "legend map voicecard"
-                         "legend map orders"
+                         "legend map voicecard"
+                         "info map orders"
                          "info map orders";
 }
 
@@ -83,7 +84,7 @@ body{
     overflow: visible;
     z-index: 100;
     width: 100%;
-    height: 10%;
+    height: 100%;
     margin: 10px;
     grid-area: voicecard;
     padding-right: 10px;
