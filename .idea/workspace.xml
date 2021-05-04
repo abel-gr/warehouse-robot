@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="f1d5d3a7-09c2-463c-9d24-6ce0b75b8e09" name="Default Changelist" comment="3d parts v2" />
+=======
+    <list default="true" id="e146f7d3-0bc2-42e0-aa65-0d150c909ea4" name="Default Changelist" comment="Botón de grabación de audio añadido" />
+>>>>>>> Botón de grabación de audio añadido
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+<<<<<<< HEAD
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -21,11 +26,18 @@
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
+=======
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1s4xJ0unKYHe7YZw8w3k0Qoh2Ch" />
+>>>>>>> Botón de grabación de audio añadido
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+<<<<<<< HEAD
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="MATLAB_INTERPRETER" value="C:\Program Files\MATLAB\R2020b\bin\matlab.exe" />
@@ -68,10 +80,16 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+=======
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+>>>>>>> Botón de grabación de audio añadido
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
+<<<<<<< HEAD
       <changelist id="f1d5d3a7-09c2-463c-9d24-6ce0b75b8e09" name="Default Changelist" comment="" />
       <created>1619345652811</created>
       <option name="number" value="Default" />
@@ -99,6 +117,24 @@
       <updated>1619639056181</updated>
     </task>
     <option name="localTasksCounter" value="3" />
+=======
+      <changelist id="e146f7d3-0bc2-42e0-aa65-0d150c909ea4" name="Default Changelist" comment="" />
+      <created>1620145590754</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1620145590754</updated>
+      <workItem from="1620145592870" duration="352000" />
+      <workItem from="1620145957621" duration="14258000" />
+    </task>
+    <task id="LOCAL-00001" summary="Botón de grabación de audio añadido">
+      <created>1620164117443</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1620164117443</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+>>>>>>> Botón de grabación de audio añadido
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -117,6 +153,7 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
+<<<<<<< HEAD
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="First steps on the object oriented robot library" />
     <MESSAGE value="3d parts v2" />
@@ -135,5 +172,9 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/warehouserobot$robot.coverage" NAME="main Coverage Results" MODIFIED="1619627270989" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Simulation/Coppelia" />
+=======
+    <MESSAGE value="Botón de grabación de audio añadido" />
+    <option name="LAST_COMMIT_MESSAGE" value="Botón de grabación de audio añadido" />
+>>>>>>> Botón de grabación de audio añadido
   </component>
 </project>
