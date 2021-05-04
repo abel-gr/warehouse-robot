@@ -9,7 +9,7 @@ import math
 init_vprinting(use_latex='mathjax', pretty_print=False)
 from sympy.physics.mechanics import dynamicsymbols
 
-theta1, theta2, d3, lc, la, lb, theta3, alpha, a, d = dynamicsymbols('theta1 theta2 d3 lc la lb theta alpha a d')
+theta1, theta2, theta3, theta4, d3, lc, la, lb, alpha, a, d = dynamicsymbols('theta1 theta2 theta3 theta4 d3 lc la lb alpha a d')
 
 
 class Image:
@@ -103,24 +103,26 @@ class Arm:
 
     def move_to(self, coords):
         # Work in progress
-        l1 = 0.175
-        l2 = l1
-        l3 = 0.0750
+        l1 = 0.25
+        l2 = 0.175
+        l3 = l2
+        l4 = 0.0750
 
-        eq1 = coords[0]
-        eq2 = l1*cos(theta1)+l2*cos(theta1+theta2) - coords[1] #+l3*cos(theta1+theta2+theta3)
-        eq3 = l1*cos(theta1)+l2*cos(theta1+theta2) - coords[2]#+l3*cos(theta1+theta2+theta3)
+        eq1 = -0.175*sin(theta2+theta3)*sin(theta1)*cos(90)-0.25*sin(theta2+theta3+theta4)*sin(theta1)*cos(90)-0.25*sin(theta1)*sin(theta2)*cos(90)+l1*cos(theta2+theta3)*cos(theta1)+0.075*cos(theta2+theta3+theta4)*cos(theta1)+l1*cos(theta1)*cos(theta2) -coords[0]
+        eq2 = 0.175*sin(theta2+theta3)*cos(90)*cos(theta1)+0.075*sin(theta2+theta3+theta4)*cos(90)*cos(theta1)+0.175*sin(theta1)*cos(theta2+theta3)+0.075*sin(theta1)*cos(theta2+theta3+theta4)+0.175*sin(theta1)*cos(theta2)+0.175*sin(theta2)*cos(90)*cos(theta1) - coords[1]
+        eq3 = 0.175*sin(90)*sin(theta2+theta3)+0.075*sin(90)*sin(theta2+theta3+theta4)+0.175*sin(90)*sin(theta2)+0.25 - coords[2]
+
 
         #eq3 = 0.105 - d3 - coords[2]
 
         precs = [30, 25, 20, 15, 10, 5]
         for p in precs:
             try:
-                q = nsolve((eq1, eq2, eq3), (theta1, theta2, theta2), (1, 1, 1), prec=p)
+                q = nsolve((eq1, eq2, eq3), (theta1, theta2, theta3), (1, 1, 1), prec=p)
             except:
                 if p == precs[-1]:
                     print('No se encuentra solución para: ', coords[0], ", ", coords[1], ", ", coords[2])
-                    q = [0, 0, 0]
+                    q = [0, 0, 0, 0]
 
         #retCode = simxSetJointTargetPosition(self.clientID, self.base, q[0], simx_opmode_oneshot)
         retCode = simxSetJointTargetPosition(self.clientID, self.shoulder, q[0], simx_opmode_oneshot)
