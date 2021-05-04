@@ -66,6 +66,7 @@ public class Warehouse : MonoBehaviour
     {
         foreach (Robot robot in robots)
         {
+            robot.RobotState = Robot.RobotStates.NotReady;
             robot.gotoClosestNode();
         }
     }

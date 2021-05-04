@@ -24,15 +24,22 @@ public class Robot : MonoBehaviour
 
     public bool rightSensorCollision = false;
 
+    public Robot_arm robot_Arm;
+
+    public Warehouse_shelf shelf_target;
+    public bool shelf_node_p = true; // true for 1, false for 2
+
+    public bool incZ = false;
+
     public enum RobotStates{
-        Available, OnWayToPick, PickingUp, OnWayToDrop
+        Available, OnWayToPick, PickingUp, OnWayToDrop, NotReady
     }
 
-    public RobotStates RobotState = RobotStates.Available;
+    public RobotStates RobotState = RobotStates.NotReady;
 
     void Start()
     {
-        positionB = transform.position;
+        //positionB = transform.position;
 
         Yrotation = transform.eulerAngles.y;
 
@@ -68,7 +75,7 @@ public class Robot : MonoBehaviour
 
         closestNodeArrived = closestNode.nodeID;
 
-        //Debug.Log("En camino al nodo mas cercano: " + closestNode.transform.position);
+        Debug.Log("En camino al nodo mas cercano: " + closestNode.transform.position);
     }
 
     bool wayToClosestNode = false;
@@ -90,6 +97,8 @@ public class Robot : MonoBehaviour
                 lastDestination = node;
 
                 positionB = node.transform.position;
+
+                incZ = (positionB.z > transform.position.z) ? true : false;
 
                 TargetNodeID = node.nodeID;
 
@@ -134,30 +143,6 @@ public class Robot : MonoBehaviour
 
     void calculateTargetYrotation(Vector3 tow)
     {
-        /*int x = (int)tow.x;
-        int z = (int)tow.z;
-
-        int x2 = (int)transform.localPosition.x;
-        int z2 = (int)transform.localPosition.z;
-
-        targetYrotation = Yrotation;
-        if (x > x2)
-        {
-            targetYrotation = 90;
-        }
-        else if (x < x2)
-        {
-            targetYrotation = -90;
-        }
-        else if (z > z2)
-        {
-            targetYrotation = 0;
-        }
-        else if (z < z2)
-        {
-            targetYrotation = 180;
-        }*/
-
         Vector2 v2 = get2dvectortransform(transform.position);
         float a = Vector2.Angle(Vector2.right, get2dvectortransform(positionB) - v2) + 90;
 
@@ -173,7 +158,8 @@ public class Robot : MonoBehaviour
             targetYrotation += 360;
         }
 
-        if (positionB.z > transform.position.z)
+        
+        if (incZ)//positionB.z > transform.position.z - 2)
         {
             if (targetYrotation < -177 && targetYrotation > -183)
             {
@@ -184,7 +170,6 @@ public class Robot : MonoBehaviour
                 targetYrotation -= 180;
             }
         }
-
     }
 
     void Update()
@@ -200,6 +185,15 @@ public class Robot : MonoBehaviour
             if(lastRoutePositionVisited > nodeRoute.Count)
             {
                 //Debug.Log("Robot #" + robotID + " arrived to the end of its route " + closestNodeArrived);
+                if (RobotState == RobotStates.OnWayToPick)
+                {
+                    RobotState = RobotStates.PickingUp;
+                    robot_Arm.rotated = 0;
+                }
+            }
+
+            if(RobotState == RobotStates.NotReady && closestNodeArrived != -1)
+            {
                 RobotState = RobotStates.Available;
             }
 
@@ -212,11 +206,24 @@ public class Robot : MonoBehaviour
 
             calculateTargetYrotation(tow);
 
-            if(((int)targetYrotation != (int)Yrotation) && ((int)targetYrotation + 1 != (int)Yrotation) && ((int)targetYrotation - 1 != (int)Yrotation))
+            if (targetYrotation > 360)
             {
-                Quaternion newRotation = Quaternion.Euler(0, targetYrotation, 0);
+                targetYrotation -= 360;
+            }
 
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, newRotation, rotateSpeed * Time.deltaTime);
+            if (targetYrotation < 0)
+            {
+                targetYrotation += 360;
+            }
+
+            if (Yrotation < targetYrotation - 2 || Yrotation > targetYrotation + 2)
+            {
+                if (RobotState != RobotStates.PickingUp)
+                {
+                    Quaternion newRotation = Quaternion.Euler(0, targetYrotation, 0);
+
+                    transform.rotation = Quaternion.RotateTowards(transform.rotation, newRotation, rotateSpeed * Time.deltaTime);
+                }
 
             }
             else
@@ -229,7 +236,69 @@ public class Robot : MonoBehaviour
 
             Yrotation = transform.rotation.eulerAngles.y;
 
+            if(Yrotation > 360)
+            {
+                Yrotation -= 360;
+            }
+
+            if(Yrotation < 0)
+            {
+                Yrotation += 360;
+            }
+
         }
+
+        if (RobotState == RobotStates.PickingUp)
+        {
+            if (robot_Arm.rotated == 6)
+            {
+                RobotState = RobotStates.Available;
+            }
+            else
+            {
+                if (!robot_Arm.rotating)
+                {
+                    robot_Arm.rotating = true;
+
+                    if (robot_Arm.rotated == 0)
+                    {
+                        robot_Arm.setJointSpeed(2, 20);
+                        robot_Arm.rotateJoint(0, 0);
+                        robot_Arm.rotateJoint(1, -40);
+                        robot_Arm.rotateJoint(2, -95);
+                    }
+                    else if (robot_Arm.rotated == 1)
+                    {
+                        robot_Arm.enableActuator();
+                    }
+                    else if (robot_Arm.rotated == 2)
+                    {
+                        robot_Arm.rotateJoint(0, 0);
+                        robot_Arm.rotateJoint(1, 0);
+                        robot_Arm.rotateJoint(2, -20);
+                    }
+                    else if (robot_Arm.rotated == 3)
+                    {
+                        robot_Arm.rotateJoint(0, 90);
+                        robot_Arm.rotateJoint(1, 25);
+                        robot_Arm.rotateJoint(2, -120);
+                    }
+                    else if (robot_Arm.rotated == 4)
+                    {
+                        robot_Arm.disableActuator();
+                    }
+                    else if (robot_Arm.rotated == 5)
+                    {
+                        robot_Arm.setJointSpeed(2, 60);
+                        robot_Arm.rotateJoint(0, 90);
+                        robot_Arm.rotateJoint(1, 0);
+                        robot_Arm.rotateJoint(2, 0);
+                    } 
+                }
+            }
+            
+        }
+
     }
 
 }
