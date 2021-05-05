@@ -1,20 +1,3 @@
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-var firebaseConfig = {
-	apiKey: "AIzaSyCf0lFsEDrCVJ69hDs0CUt1XYsAnKYmMi4",
-	authDomain: "warehousewaiter.firebaseapp.com",
-	databaseURL: "https://warehousewaiter-default-rtdb.europe-west1.firebasedatabase.app",
-	projectId: "warehousewaiter",
-	storageBucket: "warehousewaiter.appspot.com",
-	messagingSenderId: "218777444604",
-	appId: "1:218777444604:web:4c055bcdd83c10c9117779",
-	measurementId: "G-D6L3NYX1X9"
-};
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-firebase.analytics();
-
-
 URL = window.URL || window.webkitURL;
 
 var gumStream;
