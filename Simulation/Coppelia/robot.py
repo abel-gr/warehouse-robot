@@ -2,14 +2,15 @@ import numpy as np
 import cv2
 from sim import *
 from time import sleep
-from sympy import *
+from sympy import sin, cos, nsolve
 from sympy.physics.vector import init_vprinting
-import math
+from math import pi, floor, ceil, radians, degrees
 
 init_vprinting(use_latex='mathjax', pretty_print=False)
 from sympy.physics.mechanics import dynamicsymbols
 
-theta1, theta2, theta3, theta4, d3, lc, la, lb, alpha, a, d = dynamicsymbols('theta1 theta2 theta3 theta4 d3 lc la lb alpha a d')
+theta1, theta2, theta3, theta4, d3, lc, la, lb, alpha, a, d = dynamicsymbols(
+    'theta1 theta2 theta3 theta4 d3 lc la lb alpha a d')
 
 
 class Image:
@@ -50,7 +51,7 @@ class Sensors:
 
     def yaw(self):
         ret, bd = simxGetObjectOrientation(self.clientID, self.body, -1, simx_opmode_blocking)
-        #print(np.rad2deg(bd[2]))
+        # print(np.rad2deg(bd[2]))
         return np.rad2deg(bd[2])
 
 
@@ -102,39 +103,93 @@ class Arm:
         return simxGetObjectPosition(self.clientID, self.tip, -1, simx_opmode_blocking)
 
     def move_to(self, coords):
+
+        p = simxGetObjectPosition(self.clientID, self.base, -1, simx_opmode_blocking)[1]
+
         # Work in progress
-        l1 = 0.25
-        l2 = 0.175
-        l3 = l2
+        l1 = 0.26
+        l2 = 0.19056
+        l3 = 0.18837
         l4 = 0.0750
 
-        eq1 = -0.175*sin(theta2+theta3)*sin(theta1)*cos(90)-0.25*sin(theta2+theta3+theta4)*sin(theta1)*cos(90)-0.25*sin(theta1)*sin(theta2)*cos(90)+l1*cos(theta2+theta3)*cos(theta1)+0.075*cos(theta2+theta3+theta4)*cos(theta1)+l1*cos(theta1)*cos(theta2) -coords[0]
-        eq2 = 0.175*sin(theta2+theta3)*cos(90)*cos(theta1)+0.075*sin(theta2+theta3+theta4)*cos(90)*cos(theta1)+0.175*sin(theta1)*cos(theta2+theta3)+0.075*sin(theta1)*cos(theta2+theta3+theta4)+0.175*sin(theta1)*cos(theta2)+0.175*sin(theta2)*cos(90)*cos(theta1) - coords[1]
-        eq3 = 0.175*sin(90)*sin(theta2+theta3)+0.075*sin(90)*sin(theta2+theta3+theta4)+0.175*sin(90)*sin(theta2)+0.25 - coords[2]
+        eq1 = (l2 * cos(theta2) + l3 * cos(theta2 + theta3)) * cos(theta1) - coords[0]
+        eq2 = (l2 * cos(theta2) + l3 * cos(theta2 + theta3)) * sin(theta1) - coords[1]
+        eq3 = l1 + l2 * sin(theta2) + l3 * sin(theta2 + theta3) - coords[2]
 
 
-        #eq3 = 0.105 - d3 - coords[2]
+        succes = True
+        q = [0, 0, 0]
+        try:
+            q = list(nsolve((eq1, eq2, eq3), (theta1, theta2, theta3), (1, 1, 1), prec=5))
+        except:
+            print('No se encuentra solución para: ', coords[0], ", ", coords[1], ", ", coords[2])
+            succes = False
 
-        precs = [30, 25, 20, 15, 10, 5]
-        for p in precs:
-            try:
-                q = nsolve((eq1, eq2, eq3), (theta1, theta2, theta3), (1, 1, 1), prec=p)
-            except:
-                if p == precs[-1]:
-                    print('No se encuentra solución para: ', coords[0], ", ", coords[1], ", ", coords[2])
-                    q = [0, 0, 0, 0]
+        if succes:
+            aux = list(q)
+            # Hay que establecerlos dentro de los límites de - pi y pi para que el coppelia responda
+            q[0] = q[0] - round(q[0] / (np.pi * 2)) * 2 * np.pi
+            q[1] = q[1] - round(q[1] / (np.pi * 2)) * 2 * np.pi
+            q[2] = q[2] - round(q[2] / (np.pi * 2)) * 2 * np.pi
 
-        #retCode = simxSetJointTargetPosition(self.clientID, self.base, q[0], simx_opmode_oneshot)
-        retCode = simxSetJointTargetPosition(self.clientID, self.shoulder, q[0], simx_opmode_oneshot)
-        retCode = simxSetJointTargetPosition(self.clientID, self.elbow, -q[1], simx_opmode_oneshot)
-        return retCode
+            # Grados de cada eje
+            a1 = q[0] * 180 / np.pi
+            a2 = q[1] * 180 / np.pi
+            a3 = q[2] * 180 / np.pi
 
-    def direct(self, angles):
-        retCode = simxSetJointTargetPosition(self.clientID, self.base, math.radians(angles[0]), simx_opmode_oneshot)
-        retCode = simxSetJointTargetPosition(self.clientID, self.shoulder, -math.radians(angles[1]),
-                                             simx_opmode_oneshot)
-        retCode = simxSetJointTargetPosition(self.clientID, self.elbow, -math.radians(angles[2]), simx_opmode_oneshot)
-        retCode = simxSetJointTargetPosition(self.clientID, self.wrist, -math.radians(angles[3]), simx_opmode_oneshot)
+            # reduccion al primer quadrante
+            if 0 > a2 > -90:
+                a2 = a2 * -1
+
+            if -90 > a2 > -180:
+                a2 = 180 + a2
+
+            if 0 > a3 > -90:
+                a3 = a3 * -1
+
+            if -90 > a3 > -180:
+                a3 = 180 + a3
+
+            q[0] = radians(a1) - round(q[0] / (np.pi * 2)) * 2 * np.pi
+            q[1] = radians(a2) - round(q[1] / (np.pi * 2)) * 2 * np.pi
+            q[2] = radians(a3) - round(q[2] / (np.pi * 2)) * 2 * np.pi
+
+            o1 = np.cos(q[1]+q[2])*np.cos(q[0])
+            o2 = np.cos(q[1] + q[2]) * np.sin(q[0])
+            o3 = np.sin(q[1] + q[2])
+
+            print(q)
+            print(a1, a2, a3)
+            print(self.direct(q))
+
+    def direct(self, angles, unit='rad'):
+
+        if unit == 'rad':
+            print(angles)
+            retCode = simxSetJointTargetPosition(self.clientID, self.base, angles[0], simx_opmode_oneshot)
+            sleep(1)
+            retCode = simxSetJointTargetPosition(self.clientID, self.shoulder, angles[1],
+                                                 simx_opmode_oneshot)
+            sleep(1)
+            retCode = simxSetJointTargetPosition(self.clientID, self.elbow, angles[2], simx_opmode_oneshot)
+            sleep(1)
+            if len(angles) > 3:
+                retCode = simxSetJointTargetPosition(self.clientID, self.wrist, -angles[3], simx_opmode_oneshot)
+        else:
+            for i, v in enumerate(angles):
+                angles[i] = v - floor(v / 360) * (pi * 2)
+
+            retCode = simxSetJointTargetPosition(self.clientID, self.base, radians(angles[0]), simx_opmode_oneshot)
+            sleep(1)
+            retCode = simxSetJointTargetPosition(self.clientID, self.shoulder, -radians(angles[1]),
+                                                 simx_opmode_oneshot)
+            sleep(1)
+            retCode = simxSetJointTargetPosition(self.clientID, self.elbow, -radians(angles[2]),
+                                                 simx_opmode_oneshot)
+            sleep(1)
+            if len(angles) > 3:
+                retCode = simxSetJointTargetPosition(self.clientID, self.wrist, -radians(angles[3]),
+                                                     simx_opmode_oneshot)
         return retCode
 
 
@@ -145,7 +200,7 @@ class Brain:  # It will be the main class where all the other class will be conn
         self.clientID = connect(19999)
         assert self.clientID != -1
         self.axis = np.array([0, 0, 0])
-
+        self.arm_home = [-90, 90, 0]
         ret_codes = np.zeros(13)
         ret_codes[0], self.obj = simxGetObjectHandle(self.clientID, 'Robot', simx_opmode_blocking)
         ret_codes[1], self.base = simxGetObjectHandle(self.clientID, 'Base_joint', simx_opmode_blocking)
@@ -195,7 +250,7 @@ class Brain:  # It will be the main class where all the other class will be conn
         self.axis[2] += 90
         self.check()
         sleep(0.5)
-        #self.check()
+        # self.check()
 
     def turn_right(self):
         self.check()

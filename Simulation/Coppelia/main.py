@@ -3,13 +3,7 @@ from matplotlib import pyplot as plt
 import math
 from time import sleep
 b = Brain()
+#b.turn_right()
+#b.arm.direct([-90, 90, 0], unit='deg')
 
-while True:
-    b.legs.forward(10)
-    sleep(5)
-    b.check()
-    b.legs.forward(10)
-    sleep(5)
-    b.turn_right()
-
-#b.legs.forward(3, 0.6)
+b.arm.move_to([0.05, 0.275, 0.225])
