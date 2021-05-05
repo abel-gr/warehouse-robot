@@ -70,7 +70,13 @@ function getOrderGeneralInfo(id, incomplete_orders, orderState){
 
 function getShelveDatabaseData(){
     for (var i = 0; i < totalShelves; i++) {
-
+        /*
+        var OrderRef = firebase.database().ref('posts/' + postId + '/starCount');
+        starCountRef.on('value', (snapshot) => {
+        const data = snapshot.val();
+        updateStarCount(postElement, data);
+        });
+        */
         //TODO: obtener las 3 variables de la DB
         var incomplete_orders = 0;
         if (Math.random() > 0.8) {
