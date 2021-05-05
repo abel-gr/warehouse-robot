@@ -1,8 +1,15 @@
 from robot import Brain
 from matplotlib import pyplot as plt
 import math
-import time
+from time import sleep
 b = Brain()
 
-b.arm.move_to([0, -1.23, 0.25])
+while True:
+    b.legs.forward(10)
+    sleep(5)
+    b.check()
+    b.legs.forward(10)
+    sleep(5)
+    b.turn_right()
+
 #b.legs.forward(3, 0.6)

@@ -170,6 +170,7 @@ class Brain:  # It will be the main class where all the other class will be conn
         print("Initialization completed, connection established")
 
     def turn_left(self):
+        self.check()
         self.legs.turn_left(1)
         deg = self.sensors.yaw()
         stop = 88
@@ -189,12 +190,15 @@ class Brain:  # It will be the main class where all the other class will be conn
                 r = deg < self.axis[2] + stop
 
         self.legs.stop()
+        if self.axis[2] == 180:
+            self.axis[2] = -180
         self.axis[2] += 90
         self.check()
         sleep(0.5)
         #self.check()
 
     def turn_right(self):
+        self.check()
         self.legs.turn_right(1)
         deg = self.sensors.yaw()
         stop = 88
@@ -213,13 +217,16 @@ class Brain:  # It will be the main class where all the other class will be conn
             else:
                 r = deg > self.axis[2] - stop
 
+        if self.axis[2] == -180:
+            self.axis[2] = 180
         self.axis[2] -= 90
+        print(self.axis[2])
         self.check()
         sleep(0.5)
 
     def check(self):
         deg = self.sensors.yaw()
-        if np.abs(deg - self.axis[2]) > 1:
+        if np.abs(deg - self.axis[2]) > 0.75:
             self.legs.stop()
 
             if deg < 0 and self.axis[2] == 180:
