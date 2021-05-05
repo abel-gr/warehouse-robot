@@ -11,10 +11,10 @@ body{
     text-align: center;
     display: grid;
     grid-template-columns: 20% 60% 20%;
-    grid-template-rows: 25% 35% 40%;
+    grid-template-rows: 15% 20% 20% 45%;
     grid-template-areas: "legend map voicecard"
                          "legend map voicecard"
-                         "info map orders"
+                         "legend map orders"
                          "info map orders";
 }
 
