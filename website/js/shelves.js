@@ -1,3 +1,4 @@
+import { firebase } from './firebase.js';
 
 var totalShelves = 72;
 var shelvesPerRow = 6;
@@ -69,15 +70,15 @@ function getOrderGeneralInfo(id, incomplete_orders, orderState){
 }
 
 function getShelveDatabaseData(){
+    const dbRef = firebase.database().ref();
+    firebase.database().ref('shelves/sections/section1/shelf1').on('stock',(snap)=>{
+        console.log('Valor stock1 obtenido de bd:');
+        console.log(snap.val());
+    });
+
     for (var i = 0; i < totalShelves; i++) {
-        /*
-        var OrderRef = firebase.database().ref('posts/' + postId + '/starCount');
-        starCountRef.on('value', (snapshot) => {
-        const data = snapshot.val();
-        updateStarCount(postElement, data);
-        });
-        */
-        //TODO: obtener las 3 variables de la DB
+
+                //TODO: obtener las 3 variables de la DB
         var incomplete_orders = 0;
         if (Math.random() > 0.8) {
             incomplete_orders = Math.floor(Math.random() * 10);
