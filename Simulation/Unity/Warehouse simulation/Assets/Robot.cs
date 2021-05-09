@@ -37,6 +37,8 @@ public class Robot : MonoBehaviour
 
     public RobotStates RobotState = RobotStates.NotReady;
 
+    public Robot_wheels robot_Wheels;
+
     void Start()
     {
         //positionB = transform.position;
@@ -184,6 +186,8 @@ public class Robot : MonoBehaviour
 
             if(lastRoutePositionVisited > nodeRoute.Count)
             {
+                robot_Wheels.stop = true;
+
                 //Debug.Log("Robot #" + robotID + " arrived to the end of its route " + closestNodeArrived);
                 if (RobotState == RobotStates.OnWayToPick)
                 {
@@ -199,6 +203,8 @@ public class Robot : MonoBehaviour
 
             goToRoute(nodeRoute);
             lastRoutePositionVisited++;
+
+            
         }
         else
         {
@@ -223,6 +229,16 @@ public class Robot : MonoBehaviour
                     Quaternion newRotation = Quaternion.Euler(0, targetYrotation, 0);
 
                     transform.rotation = Quaternion.RotateTowards(transform.rotation, newRotation, rotateSpeed * Time.deltaTime);
+
+                    float ad = Yrotation - targetYrotation;
+                    if(ad < 0)
+                    {
+                        ad *= -1;
+                    }
+                    if (ad > 25)
+                    {
+                        robot_Wheels.rotate(rotateSpeed);
+                    }
                 }
 
             }
@@ -231,6 +247,8 @@ public class Robot : MonoBehaviour
                 if (!rightSensorCollision)
                 {
                     transform.localPosition = tow;
+
+                    robot_Wheels.goForward(robotSpeed);
                 }
             }
 
