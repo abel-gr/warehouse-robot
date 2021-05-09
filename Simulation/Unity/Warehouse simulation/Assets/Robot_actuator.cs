@@ -5,10 +5,12 @@ using UnityEngine;
 public class Robot_actuator : MonoBehaviour
 {
 
-    float p0 = -0.745f;
-    float p1 = -1.21f;
+    float p0 = -0.85f;
+    float p1 = -1.15f;
 
     public GameObject boxesContainer;
+
+    public Transform suctionTransform;
 
     Warehouse_box picked_box = null;
 
@@ -24,6 +26,7 @@ public class Robot_actuator : MonoBehaviour
             picked_box.unpick();
 
             picked_box.transform.SetParent(boxesContainer.transform);
+            //picked_box.transform.localScale = new Vector3(0.3f, 0.1875001f, 0.5f);
         }
 
         transform.localPosition = new Vector3(0, p0, 0);
@@ -41,7 +44,7 @@ public class Robot_actuator : MonoBehaviour
                 if (picked_box == null)
                 {
                     picked_box = r;
-                    r.act = transform;
+                    r.act = suctionTransform;
                     r.picked = true;
                 }
             }
