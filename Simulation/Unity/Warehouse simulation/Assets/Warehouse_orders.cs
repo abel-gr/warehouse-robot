@@ -42,63 +42,168 @@ public class Warehouse_orders : MonoBehaviour
         }
     }
 
+    void basicAssignation(Warehouse_shelf n, Warehouse_node nodo)
+    {
+        int order_quantity = n.products_to_pick;
+        foreach (Robot r in warehouse.robots)
+        {
+            if (r.RobotState == Robot.RobotStates.Available && r.containerFilled < r.containerCapacity)
+            {
+                order_quantity = n.products_to_pick;
+                if (order_quantity > 0)
+                {
+                    int canPickup = r.containerCapacity - r.containerFilled;
+
+                    int quantityToPickup = 0;
+
+                    if (order_quantity > canPickup)
+                    {
+                        quantityToPickup = canPickup;
+                        n.products_to_pick = order_quantity - canPickup;
+                    }
+                    else if (order_quantity == canPickup)
+                    {
+                        quantityToPickup = canPickup;
+                        n.products_to_pick = 0;
+                    }
+                    else
+                    {
+                        quantityToPickup = order_quantity;
+                        n.products_to_pick = 0;
+                    }
+
+                    n.products -= quantityToPickup;
+
+                    r.containerFilled += quantityToPickup;
+
+                    r.shelf_target = n;
+
+                    warehouse.setRobotRoute(r.robotID, -1, nodo.nodeID);
+                    r.RobotState = Robot.RobotStates.OnWayToPick;
+
+                }
+            }
+        }
+    }
+
+    public float[] pond = new float[3];
+
+    void Start()
+    {
+        pond[0] = 0.6f;
+        pond[1] = 0.1f;
+        pond[2] = 0.05f;
+
+        getAllShelves();
+        initializeShelves();
+    }
+
+
+    float calculateMetric(Robot r, Warehouse_shelf n, Warehouse_node nodo, int quantityToPickup)
+    {
+        float dist = Vector2.Distance(r.get2dvectortransform(r.transform.position), r.get2dvectortransform(nodo.transform.position));
+        float filled = r.containerFilled;
+
+        float m = pond[0] * dist + pond[1] * (1/quantityToPickup) + pond[2] * filled;
+
+        return m;
+    }
+
+    void improvedAssignation(Warehouse_shelf n, Warehouse_node nodo)
+    {
+        Robot bestRobotForTask = null;
+        float bestMetric = 0;
+        int bestRobotquantityToPickup = 0;
+        int bestProductstoPick = 0;
+
+        int order_quantity = n.products_to_pick;
+        foreach (Robot r in warehouse.robots)
+        {
+            if (r.RobotState == Robot.RobotStates.Available && r.containerFilled < r.containerCapacity)
+            {
+                order_quantity = n.products_to_pick;
+                if (order_quantity > 0)
+                {
+                    int canPickup = r.containerCapacity - r.containerFilled;
+
+                    int quantityToPickup = 0;
+                    int ProductstoPick = 0;
+
+                    if (order_quantity > canPickup)
+                    {
+                        quantityToPickup = canPickup;
+                        ProductstoPick = order_quantity - canPickup;
+                    }
+                    else if (order_quantity == canPickup)
+                    {
+                        quantityToPickup = canPickup;
+                        ProductstoPick = 0;
+                    }
+                    else
+                    {
+                        quantityToPickup = order_quantity;
+                        ProductstoPick = 0;
+                    }
+
+                    float metric = calculateMetric(r, n, nodo, quantityToPickup);
+                    if (metric < bestMetric || bestRobotForTask == null)
+                    {
+                        bestRobotquantityToPickup = quantityToPickup;
+                        bestMetric = metric;
+                        bestRobotForTask = r;
+                        bestProductstoPick = ProductstoPick;
+                    }
+                }
+            }
+        }
+
+        if (bestRobotForTask != null)
+        { 
+            n.products -= bestRobotquantityToPickup;
+            n.products_to_pick = bestProductstoPick;
+
+            bestRobotForTask.containerFilled += bestRobotquantityToPickup;
+
+            bestRobotForTask.shelf_target = n;
+
+            warehouse.setRobotRoute(bestRobotForTask.robotID, -1, nodo.nodeID);
+            bestRobotForTask.RobotState = Robot.RobotStates.OnWayToPick;
+
+            Debug.Log("Robot with best metric for task: " + bestRobotForTask.robotID + " with metric: " + bestMetric);
+        }
+
+    }
+
+    void assignationStrategy(int strategy, Warehouse_shelf n, Warehouse_node nodo)
+    {
+        switch (strategy)
+        {
+            case 0:
+                basicAssignation(n, nodo);
+                break;
+
+            case 1:
+                improvedAssignation(n, nodo);
+                break;
+        }
+    }
+
     void assignRobot()
     {
         foreach (Warehouse_shelf n in shelves)
         {
             Warehouse_node nodo = n.node1;
-            bool shelf_node_p = true;
 
             if (Random.Range(0, 100) > 50)
             {
                 nodo = n.node2;
-                shelf_node_p = false;
             }
 
             int order_quantity = n.products_to_pick;
 
             if (order_quantity > 0)
             {
-                foreach (Robot r in warehouse.robots)
-                {
-                    if (r.RobotState == Robot.RobotStates.Available && r.containerFilled < r.containerCapacity)
-                    {
-                        order_quantity = n.products_to_pick;
-                        if (order_quantity > 0)
-                        {
-                            int canPickup = r.containerCapacity - r.containerFilled;
-
-                            int quantityToPickup = 0;
-
-                            if (order_quantity > canPickup)
-                            {
-                                quantityToPickup = canPickup;
-                                n.products_to_pick = order_quantity - canPickup;
-                            }
-                            else if (order_quantity == canPickup)
-                            {
-                                quantityToPickup = canPickup;
-                                n.products_to_pick = 0;
-                            }
-                            else
-                            {
-                                quantityToPickup = order_quantity;
-                                n.products_to_pick = 0;
-                            }
-
-                            n.products -= quantityToPickup;
-
-                            r.containerFilled += quantityToPickup;
-
-                            r.shelf_target = n;
-                            r.shelf_node_p = shelf_node_p;
-
-                            warehouse.setRobotRoute(r.robotID, -1, nodo.nodeID);
-                            r.RobotState = Robot.RobotStates.OnWayToPick;
-
-                        }
-                    }
-                }
+                assignationStrategy(1, n, nodo);
             }
         }
 
@@ -108,12 +213,6 @@ public class Warehouse_orders : MonoBehaviour
     {
         OrderInfo kv = new OrderInfo(node, quantity);
         globalOrders.Add(kv);
-    }
-
-    void Start()
-    {
-        getAllShelves();
-        initializeShelves();
     }
 
     void Update()
