@@ -77,6 +77,7 @@ public class Warehouse_orders : MonoBehaviour
                     r.containerFilled += quantityToPickup;
 
                     r.shelf_target = n;
+                    r.warehousenodeTarget = nodo;
 
                     warehouse.setRobotRoute(r.robotID, -1, nodo.nodeID);
                     r.RobotState = Robot.RobotStates.OnWayToPick;
@@ -165,6 +166,7 @@ public class Warehouse_orders : MonoBehaviour
             bestRobotForTask.containerFilled += bestRobotquantityToPickup;
 
             bestRobotForTask.shelf_target = n;
+            bestRobotForTask.warehousenodeTarget = nodo;
 
             warehouse.setRobotRoute(bestRobotForTask.robotID, -1, nodo.nodeID);
             bestRobotForTask.RobotState = Robot.RobotStates.OnWayToPick;
