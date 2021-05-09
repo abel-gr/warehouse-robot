@@ -19,7 +19,7 @@ public class Robot : MonoBehaviour
     public int closestNodeArrived = -1;
     public int TargetNodeID = -1;
 
-    public int containerCapacity = 5; // Total number of boxes that robot can store in its container
+    public int containerCapacity = 2; // Total number of boxes that robot can store in its container
     public int containerFilled = 0; // Number of boxes that are in the robot container
 
     public bool rightSensorCollision = false;
@@ -30,6 +30,8 @@ public class Robot : MonoBehaviour
     public bool shelf_node_p = true; // true for 1, false for 2
 
     public bool incZ = false;
+
+    public Warehouse_node warehousenodeTarget;
 
     public enum RobotStates{
         Available, OnWayToPick, PickingUp, OnWayToDrop, NotReady
@@ -191,8 +193,18 @@ public class Robot : MonoBehaviour
                 //Debug.Log("Robot #" + robotID + " arrived to the end of its route " + closestNodeArrived);
                 if (RobotState == RobotStates.OnWayToPick)
                 {
-                    RobotState = RobotStates.PickingUp;
-                    robot_Arm.rotated = 0;
+                    if (warehousenodeTarget.nodeID == closestNodeArrived)
+                    {
+                        RobotState = RobotStates.PickingUp;
+                        robot_Arm.rotated = 0;
+                    }
+                    else
+                    {
+                        if(optimalRoute.bestRoute.Count == 0)
+                        {
+                            RobotState = RobotStates.Available;
+                        }
+                    }
                 }
             }
 
@@ -298,8 +310,8 @@ public class Robot : MonoBehaviour
                     else if (robot_Arm.rotated == 3)
                     {
                         robot_Arm.rotateJoint(0, 90);
-                        robot_Arm.rotateJoint(1, 25);
-                        robot_Arm.rotateJoint(2, -120);
+                        robot_Arm.rotateJoint(1, 20);
+                        robot_Arm.rotateJoint(2, -140);
                     }
                     else if (robot_Arm.rotated == 4)
                     {
@@ -315,6 +327,12 @@ public class Robot : MonoBehaviour
                 }
             }
             
+        }else if (RobotState == RobotStates.Available)
+        {
+            if(containerCapacity == containerFilled)
+            {
+                RobotState = RobotStates.OnWayToDrop;
+            }
         }
 
     }
