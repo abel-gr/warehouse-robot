@@ -60,9 +60,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\NodesRow.cs" />
     <Compile Include="Assets\OptimalRoute.cs" />
     <Compile Include="Assets\Robot.cs" />
+    <Compile Include="Assets\Robot_actuator.cs" />
+    <Compile Include="Assets\Robot_arm.cs" />
+    <Compile Include="Assets\Robot_rightSensor.cs" />
+    <Compile Include="Assets\Robot_wheels.cs" />
+    <Compile Include="Assets\Warehouse.cs" />
+    <Compile Include="Assets\Warehouse_box.cs" />
     <Compile Include="Assets\Warehouse_node.cs" />
+    <Compile Include="Assets\Warehouse_orders.cs" />
+    <Compile Include="Assets\Warehouse_shelf.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/Abel/Documents/GitHub/unity x/Warehouse robots simulation/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
