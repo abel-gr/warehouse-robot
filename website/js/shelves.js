@@ -185,6 +185,7 @@ function getShelveDatabaseData(){
             }
 
             loadDatabaseDatainMap(sectionDataDB);
+            generateMap();
 
         }).catch((error) => {
             console.error(error);
@@ -195,6 +196,7 @@ function getShelveDatabaseData(){
     }
 
     loadInitialDataShelves();
+    generateMap();
 }
 
 function addShelve(id, container, state, incomplete_orders, stock) {
@@ -240,5 +242,3 @@ function generateMap(){
 }
 
 getShelveDatabaseData();
-
-generateMap();
