@@ -66,7 +66,7 @@ function getAllOrders(){
         var orders = [];
 
         for(var i = 0; i < shelves_per_section; i++) {
-            if (typeof shelve_orders_data[shelve_id] === 'string' || shelve_orders_data[shelve_id] instanceof String){
+            if (typeof shelve_orders_data[shelve_id] !== 'string' && !(shelve_orders_data[shelve_id] instanceof String)){
                 if(shelve_orders_data[shelve_id] !== undefined) {
                     orders.push(shelve_orders_data[shelve_id]);
                 }
