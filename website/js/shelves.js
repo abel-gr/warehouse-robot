@@ -180,12 +180,13 @@ function getShelveDatabaseData(){
             if (snapshot.exists()) {
                 console.log(snapshot.val());
                 sectionDataDB.push(snapshot.val());
+
+                loadDatabaseDatainMap(sectionDataDB);
+                generateMap();
+
             } else {
                 console.log("No data available");
             }
-
-            loadDatabaseDatainMap(sectionDataDB);
-            generateMap();
 
         }).catch((error) => {
             console.error(error);
@@ -218,6 +219,8 @@ function generateMap(){
 
     $("#container_shelves").html("");
 
+    var id = 0;
+
     for (var i = 0; i < rows; i++) {
 
         for(var k=0; k < shelvesPerCorridor; k++) {
@@ -231,6 +234,7 @@ function generateMap(){
             for (var j = 0; j < shelvesPerRow; j++) {
                 addShelve(id, sub_container, getRealShelveState(id), getRealInCompleteOrders(id), getRealStock(id));
                 id++;
+                console.log(id, getRealShelveState(id), getRealInCompleteOrders(id), getRealStock(id));
             }
         }
 
