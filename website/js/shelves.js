@@ -70,10 +70,16 @@ function getOrderGeneralInfo(id, incomplete_orders, orderState){
 }
 
 function getShelveDatabaseData(){
-    const dbRef = firebase.database().ref();
-    firebase.database().ref('shelves/sections/section1/shelf1').on('stock',(snap)=>{
-        console.log('Valor stock1 obtenido de bd:');
-        console.log(snap.val());
+    var dbRef = firebase.database().ref();
+
+    dbRef.child("shelves/sections").child("section1").child("shelf1").get().then((snapshot) => {
+        if (snapshot.exists()) {
+            console.log(snapshot.val());
+        } else {
+            console.log("No data available");
+        }
+    }).catch((error) => {
+        console.error(error);
     });
 
     for (var i = 0; i < totalShelves; i++) {
