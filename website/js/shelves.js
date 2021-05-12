@@ -218,9 +218,35 @@ function addShelve(id, container, state, incomplete_orders, stock) {
     shelve_buttons.push(button);
 }
 
+function shelveListener() {
+
+    $('.estanteria').mouseenter(function (e) {
+
+        if ($(this).attr("name") !== lastS) {
+            lastS = $(this).attr("name");
+
+            var id = $(this).attr("name");
+            info = getShelveInfo(parseInt(id));
+
+            $("#shelveInfoID").html(id);
+            $("#shelveInfoOrders").html(info[0]);
+            $("#shelveInfoStock").html(info[1]);
+
+            $("#shelveInfo").fadeIn(50);
+
+            $(".estanteria").removeClass("estanteria_seleccionada");
+            $(this).addClass("estanteria_seleccionada");
+        }
+
+    });
+
+}
+
 function generateMap(){
 
     $("#container_shelves").html("");
+
+    shelve_buttons = [];
 
     var id = 0;
 
@@ -245,6 +271,8 @@ function generateMap(){
         horizontal_corridor.className = "horizontal_corridor";
         document.getElementById("container_shelves").appendChild(horizontal_corridor);
     }
+
+    shelveListener();
 }
 
 getShelveDatabaseData();
