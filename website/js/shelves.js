@@ -78,6 +78,12 @@ function loadDatabaseDatainMap(sectionDataDB){
 
     var j = 1;
     var k = 1;
+
+    shelve_states = [];
+    shelve_orders = [];
+    shelve_stocks = [];
+    shelve_orders_data = [];
+
     for (var i = 0; i < totalShelves; i++) {
 
         var incomplete_orders;
@@ -130,25 +136,65 @@ function loadDatabaseDatainMap(sectionDataDB){
     }
 }
 
-function getShelveDatabaseData(){
-    var dbRef = firebase.database().ref();
+function loadInitialDataShelves()
+{
+    for (var i = 0; i < totalShelves; i++) {
 
-    dbRef.child("shelves/sections").get().then((snapshot) => {
+        var incomplete_orders;
+        var orderState;
+        var stock;
 
-        var sectionDataDB = [];
+        incomplete_orders = 0;
+        if (Math.random() > 0.8) {
+            incomplete_orders = Math.floor(Math.random() * 10);
+        }
+            stock = Math.floor(Math.random() * 15);
+            orderState = 0;
 
-        if (snapshot.exists()) {
-            console.log(snapshot.val());
-            sectionDataDB.push(snapshot.val());
-        } else {
-            console.log("No data available");
+
+        if(incomplete_orders>0) {
+            new_orders = [i, getOrderGeneralInfo(i, incomplete_orders, orderState)];
+        }else{
+            new_orders = "0";
         }
 
-        loadDatabaseDatainMap(sectionDataDB);
+        shelve_orders_data.push(new_orders)
 
-    }).catch((error) => {
-        console.error(error);
-    });
+        var state = calculateState(incomplete_orders, stock);
+        shelve_states.push(state);
+        shelve_orders.push(incomplete_orders);
+        shelve_stocks.push(stock);
+    }
+}
+
+function getShelveDatabaseData(){
+
+    try {
+
+        var dbRef = firebase.database().ref();
+
+        dbRef.child("shelves/sections").get().then((snapshot) => {
+
+            var sectionDataDB = [];
+
+            if (snapshot.exists()) {
+                console.log(snapshot.val());
+                sectionDataDB.push(snapshot.val());
+            } else {
+                console.log("No data available");
+            }
+
+            loadDatabaseDatainMap(sectionDataDB);
+
+        }).catch((error) => {
+            console.error(error);
+        });
+
+    }catch(exception){
+
+    }
+
+    loadInitialDataShelves();
 }
 
 function addShelve(id, container, state, incomplete_orders, stock) {
@@ -166,28 +212,33 @@ function addShelve(id, container, state, incomplete_orders, stock) {
     shelve_buttons.push(button);
 }
 
+function generateMap(){
+
+    $("#container_shelves").html("");
+
+    for (var i = 0; i < rows; i++) {
+
+        for(var k=0; k < shelvesPerCorridor; k++) {
+
+            var sub_container = document.createElement("div");
+            sub_container.type = "div";
+            sub_container.className = "sub_container_shelves";
+
+            document.getElementById("container_shelves").appendChild(sub_container);
+
+            for (var j = 0; j < shelvesPerRow; j++) {
+                addShelve(id, sub_container, getRealShelveState(id), getRealInCompleteOrders(id), getRealStock(id));
+                id++;
+            }
+        }
+
+        var horizontal_corridor = document.createElement("div");
+        horizontal_corridor.type = "div";
+        horizontal_corridor.className = "horizontal_corridor";
+        document.getElementById("container_shelves").appendChild(horizontal_corridor);
+    }
+}
+
 getShelveDatabaseData();
 
-for (var i = 0; i < rows; i++) {
-
-    for(var k=0; k < shelvesPerCorridor; k++) {
-
-        var sub_container = document.createElement("div");
-        sub_container.type = "div";
-        sub_container.className = "sub_container_shelves";
-
-        document.getElementById("container_shelves").appendChild(sub_container);
-
-        for (var j = 0; j < shelvesPerRow; j++) {
-            addShelve(id, sub_container, getRealShelveState(id), getRealInCompleteOrders(id), getRealStock(id));
-            id++;
-        }
-    }
-
-    var horizontal_corridor = document.createElement("div");
-    horizontal_corridor.type = "div";
-    horizontal_corridor.className = "horizontal_corridor";
-    document.getElementById("container_shelves").appendChild(horizontal_corridor);
-
-
-}
+generateMap();
