@@ -1,5 +1,3 @@
-import { firebase } from './firebase.js';
-
 var totalShelves = 72;
 var shelvesPerRow = 6;
 var shelvesPerCorridor = 3;
@@ -15,6 +13,11 @@ var shelve_states = [];
 var shelve_orders = [];
 var shelve_stocks = [];
 var shelve_orders_data = [];
+
+var rows = totalShelves/shelvesPerRow/shelvesPerCorridor;
+var id = 0;
+var shelves_per_section = shelvesPerRow * shelvesPerCorridor;
+var shelve_sections = totalShelves / shelves_per_section;
 
 function getRealShelveState(id){
     return shelve_states[id];
@@ -69,28 +72,43 @@ function getOrderGeneralInfo(id, incomplete_orders, orderState){
     return "Shelf ID: " + id + " - Orders: " + incomplete_orders + " - State: " + orderState;
 }
 
-function getShelveDatabaseData(){
-    var dbRef = firebase.database().ref();
+function loadDatabaseDatainMap(sectionDataDB){
+    var shelfID_a = "shelf";
+    var sectionID_a = "section";
 
-    dbRef.child("shelves/sections").child("section1").child("shelf1").get().then((snapshot) => {
-        if (snapshot.exists()) {
-            console.log(snapshot.val());
-        } else {
-            console.log("No data available");
-        }
-    }).catch((error) => {
-        console.error(error);
-    });
-
+    var j = 1;
+    var k = 1;
     for (var i = 0; i < totalShelves; i++) {
 
-                //TODO: obtener las 3 variables de la DB
-        var incomplete_orders = 0;
-        if (Math.random() > 0.8) {
-            incomplete_orders = Math.floor(Math.random() * 10);
+        var incomplete_orders;
+        var orderState;
+        var stock;
+
+        if(sectionDataDB.length > 0) {
+
+            incomplete_orders = sectionDataDB[0][sectionID_a + k.toString()][shelfID_a + j.toString()]["incomplete_orders"];
+            orderState = sectionDataDB[0][sectionID_a + k.toString()][shelfID_a + j.toString()]["orderState"];
+            stock = sectionDataDB[0][sectionID_a + k.toString()][shelfID_a + j.toString()]["stock"];
+
+            console.log(k, sectionID_a + k.toString(), shelfID_a + j.toString(), incomplete_orders, orderState, stock);
+
+            if (j < shelves_per_section) {
+                j++;
+            } else {
+                j = 1;
+                k++;
+            }
+
+        }else {
+
+            incomplete_orders = 0;
+            if (Math.random() > 0.8) {
+                incomplete_orders = Math.floor(Math.random() * 10);
+            }
+            stock = Math.floor(Math.random() * 15);
+            orderState = 0;
+
         }
-        var stock = Math.floor(Math.random() * 15);
-        var orderState = 0;
 
         // TODO: obtener info pedidos de la DB
         if(incomplete_orders>0) {
@@ -112,6 +130,27 @@ function getShelveDatabaseData(){
     }
 }
 
+function getShelveDatabaseData(){
+    var dbRef = firebase.database().ref();
+
+    dbRef.child("shelves/sections").get().then((snapshot) => {
+
+        var sectionDataDB = [];
+
+        if (snapshot.exists()) {
+            console.log(snapshot.val());
+            sectionDataDB.push(snapshot.val());
+        } else {
+            console.log("No data available");
+        }
+
+        loadDatabaseDatainMap(sectionDataDB);
+
+    }).catch((error) => {
+        console.error(error);
+    });
+}
+
 function addShelve(id, container, state, incomplete_orders, stock) {
     var button = document.createElement("button");
     button.type = "button";
@@ -128,12 +167,6 @@ function addShelve(id, container, state, incomplete_orders, stock) {
 }
 
 getShelveDatabaseData();
-
-var rows = totalShelves/shelvesPerRow/shelvesPerCorridor;
-var id = 0;
-var shelves_per_section = shelvesPerRow * shelvesPerCorridor;
-var shelve_sections = totalShelves / shelves_per_section;
-
 
 for (var i = 0; i < rows; i++) {
 
