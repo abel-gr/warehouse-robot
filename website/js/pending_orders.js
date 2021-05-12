@@ -66,7 +66,7 @@ function getAllOrders(){
         var orders = [];
 
         for(var i = 0; i < shelves_per_section; i++) {
-            if(shelve_orders_data[shelve_id]!="0") {
+            if(shelve_orders_data[shelve_id]!=="0") {
                 orders.push(shelve_orders_data[shelve_id]);
             }
             shelve_id++;
