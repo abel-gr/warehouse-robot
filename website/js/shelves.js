@@ -184,6 +184,9 @@ function getShelveDatabaseData(){
                 loadDatabaseDatainMap(sectionDataDB);
                 generateMap();
 
+                getAllOrders();
+                addOrdersSections();
+
             } else {
                 console.log("No data available");
             }

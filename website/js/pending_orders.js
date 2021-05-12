@@ -33,6 +33,8 @@ function getOrdersListItems(sectionid){
 function addOrdersSections(){
     var parent = $("#list_items_orders");
 
+    parent.html("");
+
     for(var sectionID = 0; sectionID < shelve_sections; sectionID++) {
         var template = $('#order_section_template').clone();
 
@@ -62,6 +64,8 @@ function addOrdersSections(){
 function getAllOrders(){
 
     var shelve_id = 0;
+    sectionOrders = [];
+
     for(var sectionID = 0; sectionID < shelve_sections; sectionID++) {
         var orders = [];
 
