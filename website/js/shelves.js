@@ -234,7 +234,6 @@ function generateMap(){
             for (var j = 0; j < shelvesPerRow; j++) {
                 addShelve(id, sub_container, getRealShelveState(id), getRealInCompleteOrders(id), getRealStock(id));
                 id++;
-                console.log(id, getRealShelveState(id), getRealInCompleteOrders(id), getRealStock(id));
             }
         }
 
