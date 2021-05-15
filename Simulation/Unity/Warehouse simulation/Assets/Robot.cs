@@ -147,6 +147,11 @@ public class Robot : MonoBehaviour
 
     void calculateTargetYrotation(Vector3 tow)
     {
+        if (Vector2.Distance(get2dvectortransform(transform.position), get2dvectortransform(positionB)) <= Time.deltaTime * robotSpeed * 5)
+        {
+            return;
+        }
+
         Vector2 v2 = get2dvectortransform(transform.position);
         float a = Vector2.Angle(Vector2.right, get2dvectortransform(positionB) - v2) + 90;
 
@@ -224,12 +229,11 @@ public class Robot : MonoBehaviour
 
             calculateTargetYrotation(tow);
 
-            if (targetYrotation > 360)
+            if (targetYrotation > 359)
             {
                 targetYrotation -= 360;
-            }
 
-            if (targetYrotation < 0)
+            }else if (targetYrotation < 0)
             {
                 targetYrotation += 360;
             }
@@ -247,7 +251,7 @@ public class Robot : MonoBehaviour
                     {
                         ad *= -1;
                     }
-                    if (ad > 25)
+                    if (ad > 15)
                     {
                         robot_Wheels.rotate(rotateSpeed);
                     }
@@ -256,6 +260,8 @@ public class Robot : MonoBehaviour
             }
             else
             {
+                robot_Wheels.forward_rotate = true;
+
                 if (!rightSensorCollision)
                 {
                     transform.localPosition = tow;
@@ -266,12 +272,11 @@ public class Robot : MonoBehaviour
 
             Yrotation = transform.rotation.eulerAngles.y;
 
-            if(Yrotation > 360)
+            if(Yrotation > 359)
             {
                 Yrotation -= 360;
-            }
 
-            if(Yrotation < 0)
+            }else if(Yrotation < 0)
             {
                 Yrotation += 360;
             }
