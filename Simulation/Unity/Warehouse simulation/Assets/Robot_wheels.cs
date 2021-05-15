@@ -18,6 +18,7 @@ public class Robot_wheels : MonoBehaviour
     public float speed4 = 20;
 
     public bool stop = false;
+    public bool forward_rotate = false; // true for forward, false for rotate
 
     void Start()
     {
@@ -31,6 +32,7 @@ public class Robot_wheels : MonoBehaviour
         speed3 = -20 * speed;
         speed4 = -20 * speed;
 
+        forward_rotate = true;
         stop = false;
     }
 
@@ -41,17 +43,19 @@ public class Robot_wheels : MonoBehaviour
         speed3 = 3 * speed;
         speed4 = 3 * speed;
 
+        forward_rotate = false;
         stop = false;
     }
 
     void Update()
     {
-        if (robot.RobotState != Robot.RobotStates.PickingUp && !robot.rightSensorCollision && !stop)
+        if (robot.RobotState != Robot.RobotStates.PickingUp && !stop && ((!robot.rightSensorCollision && forward_rotate) | !forward_rotate))
         {
             wheel1.Rotate(new Vector3(0, 0, speed1 * Time.deltaTime));
             wheel2.Rotate(new Vector3(0, 0, speed2 * Time.deltaTime));
             wheel3.Rotate(new Vector3(0, 0, speed3 * Time.deltaTime));
             wheel4.Rotate(new Vector3(0, 0, speed4 * Time.deltaTime));
         }
+
     }
 }
