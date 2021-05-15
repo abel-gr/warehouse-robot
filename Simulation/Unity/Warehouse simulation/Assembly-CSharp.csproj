@@ -60,6 +60,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\CameraControl.cs" />
     <Compile Include="Assets\NodesRow.cs" />
     <Compile Include="Assets\OptimalRoute.cs" />
     <Compile Include="Assets\Robot.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="Assets\Warehouse_node.cs" />
     <Compile Include="Assets\Warehouse_orders.cs" />
     <Compile Include="Assets\Warehouse_shelf.cs" />
+    <Compile Include="Assets\Warehouse_training.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/Abel/Documents/GitHub/unity x/Warehouse robots simulation/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
