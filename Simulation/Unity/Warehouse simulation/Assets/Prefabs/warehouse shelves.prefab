@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 878185652825753268}
   - component: {fileID: 1304546508916406490}
   - component: {fileID: 4155414308884516642}
+  - component: {fileID: 156113364734922743}
   m_Layer: 0
   m_Name: warehouse shelves
   m_TagString: Untagged
@@ -66,6 +67,25 @@ MonoBehaviour:
   warehouse: {fileID: 1304546508916406490}
   shelves: []
   robotsReady: 0
+  warehouse_Training: {fileID: 156113364734922743}
+  pond:
+  - 0
+  - 0
+  - 0
+--- !u!114 &156113364734922743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5443988822719287314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d034fe7867b57946bf5452ab64b6618, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  warehouse: {fileID: 1304546508916406490}
+  warehouse_Orders: {fileID: 4155414308884516642}
 --- !u!1001 &2540474498120564891
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -133,22 +153,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3205552487636830743, guid: d635e1c68da17d1419170b5e0ffbb18a,
-        type: 3}
-      propertyPath: RowID
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 639289943536349027, guid: d635e1c68da17d1419170b5e0ffbb18a,
-        type: 3}
-      propertyPath: RowID
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 414862523821661311, guid: d635e1c68da17d1419170b5e0ffbb18a,
         type: 3}
       propertyPath: RowID
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 853036980520727375, guid: d635e1c68da17d1419170b5e0ffbb18a,
+        type: 3}
+      propertyPath: RowID
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3205552487636830743, guid: d635e1c68da17d1419170b5e0ffbb18a,
+        type: 3}
+      propertyPath: RowID
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 639289943536349027, guid: d635e1c68da17d1419170b5e0ffbb18a,
         type: 3}
       propertyPath: RowID
       value: 2
@@ -228,22 +248,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3205552487636830743, guid: d635e1c68da17d1419170b5e0ffbb18a,
-        type: 3}
-      propertyPath: RowID
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 639289943536349027, guid: d635e1c68da17d1419170b5e0ffbb18a,
-        type: 3}
-      propertyPath: RowID
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 414862523821661311, guid: d635e1c68da17d1419170b5e0ffbb18a,
         type: 3}
       propertyPath: RowID
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 853036980520727375, guid: d635e1c68da17d1419170b5e0ffbb18a,
+        type: 3}
+      propertyPath: RowID
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3205552487636830743, guid: d635e1c68da17d1419170b5e0ffbb18a,
+        type: 3}
+      propertyPath: RowID
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 639289943536349027, guid: d635e1c68da17d1419170b5e0ffbb18a,
         type: 3}
       propertyPath: RowID
       value: 4
@@ -323,22 +343,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3205552487636830743, guid: d635e1c68da17d1419170b5e0ffbb18a,
-        type: 3}
-      propertyPath: RowID
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 639289943536349027, guid: d635e1c68da17d1419170b5e0ffbb18a,
-        type: 3}
-      propertyPath: RowID
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 414862523821661311, guid: d635e1c68da17d1419170b5e0ffbb18a,
         type: 3}
       propertyPath: RowID
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 853036980520727375, guid: d635e1c68da17d1419170b5e0ffbb18a,
+        type: 3}
+      propertyPath: RowID
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3205552487636830743, guid: d635e1c68da17d1419170b5e0ffbb18a,
+        type: 3}
+      propertyPath: RowID
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 639289943536349027, guid: d635e1c68da17d1419170b5e0ffbb18a,
         type: 3}
       propertyPath: RowID
       value: 6
@@ -418,22 +438,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3205552487636830743, guid: d635e1c68da17d1419170b5e0ffbb18a,
-        type: 3}
-      propertyPath: RowID
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 639289943536349027, guid: d635e1c68da17d1419170b5e0ffbb18a,
-        type: 3}
-      propertyPath: RowID
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 414862523821661311, guid: d635e1c68da17d1419170b5e0ffbb18a,
         type: 3}
       propertyPath: RowID
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 853036980520727375, guid: d635e1c68da17d1419170b5e0ffbb18a,
+        type: 3}
+      propertyPath: RowID
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3205552487636830743, guid: d635e1c68da17d1419170b5e0ffbb18a,
+        type: 3}
+      propertyPath: RowID
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 639289943536349027, guid: d635e1c68da17d1419170b5e0ffbb18a,
         type: 3}
       propertyPath: RowID
       value: 8
