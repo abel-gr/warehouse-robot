@@ -202,6 +202,11 @@ public class Robot : MonoBehaviour
                     {
                         RobotState = RobotStates.PickingUp;
                         robot_Arm.rotated = 0;
+
+                        if (Warehouse_training.trainingMode)
+                        {
+                            Warehouse_training.robotsFinished++;
+                        }
                     }
                     else
                     {

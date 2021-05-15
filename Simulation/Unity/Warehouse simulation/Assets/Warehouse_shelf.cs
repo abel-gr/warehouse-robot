@@ -56,7 +56,7 @@ public class Warehouse_shelf : MonoBehaviour
 
     void Update()
     {
-        if (generateOrderB)
+        if (generateOrderB && !Warehouse_training.trainingMode)
         {
             if (warehouse_orders != null)
             {

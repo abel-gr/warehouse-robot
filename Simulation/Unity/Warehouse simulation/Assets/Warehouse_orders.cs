@@ -10,6 +10,8 @@ public class Warehouse_orders : MonoBehaviour
 
     public bool robotsReady = false;
 
+    public Warehouse_training warehouse_Training;
+
     public class OrderInfo
     {
         public Warehouse_node node;
@@ -39,6 +41,11 @@ public class Warehouse_orders : MonoBehaviour
             i++;
 
             r.warehouse_orders = this;
+        }
+
+        if (Warehouse_training.trainingMode)
+        {
+            warehouse_Training.startTrainingIteration();
         }
     }
 
@@ -87,13 +94,49 @@ public class Warehouse_orders : MonoBehaviour
         }
     }
 
-    public float[] pond = new float[3];
+    public struct formulaWeights
+    {
+        public float distance;
+        public float quantityToPickup;
+        public float filled;
+    }
+
+    public formulaWeights formula_weights;
 
     void Start()
     {
-        pond[0] = 0.6f;
-        pond[1] = 0.1f;
-        pond[2] = 0.05f;
+        /*
+         * If there are weights values saved on disk, load them. 
+         * Else, use those that have already been obtained from previously carried out trainings.
+        */
+        if (PlayerPrefs.HasKey("formula_weight_distance"))
+        {
+            formula_weights.distance = PlayerPrefs.GetFloat("formula_weight_distance");
+        }
+        else
+        {
+            formula_weights.distance = 0.4151846f;
+        }
+
+        if (PlayerPrefs.HasKey("formula_weight_quantityToPickup"))
+        {
+            formula_weights.quantityToPickup = PlayerPrefs.GetFloat("formula_weight_quantityToPickup");
+        }
+        else
+        {
+            formula_weights.quantityToPickup = 0.1354322f;
+        }
+
+        if (PlayerPrefs.HasKey("formula_weight_filled"))
+        {
+            formula_weights.filled = PlayerPrefs.GetFloat("formula_weight_filled");
+        }
+        else
+        {
+            formula_weights.filled = 0.1040449f;
+        }
+
+        //Debug.Log("Formula weights: " + formula_weights.distance + ", " + formula_weights.quantityToPickup + ", " + formula_weights.filled);
 
         getAllShelves();
         initializeShelves();
@@ -105,7 +148,7 @@ public class Warehouse_orders : MonoBehaviour
         float dist = Vector2.Distance(r.get2dvectortransform(r.transform.position), r.get2dvectortransform(nodo.transform.position));
         float filled = r.containerFilled;
 
-        float m = pond[0] * dist + pond[1] * (1/quantityToPickup) + pond[2] * filled;
+        float m = formula_weights.distance * dist + formula_weights.quantityToPickup * (1/quantityToPickup) + formula_weights.filled * filled;
 
         return m;
     }
