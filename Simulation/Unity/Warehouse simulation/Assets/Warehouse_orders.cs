@@ -81,13 +81,13 @@ public class Warehouse_orders : MonoBehaviour
 
                     n.products -= quantityToPickup;
 
-                    r.containerFilled += quantityToPickup;
-
                     r.shelf_target = n;
                     r.warehousenodeTarget = nodo;
 
                     warehouse.setRobotRoute(r.robotID, -1, nodo.nodeID);
                     r.RobotState = Robot.RobotStates.OnWayToPick;
+
+                    r.containerFilled += quantityToPickup;
 
                 }
             }
@@ -206,13 +206,13 @@ public class Warehouse_orders : MonoBehaviour
             n.products -= bestRobotquantityToPickup;
             n.products_to_pick = bestProductstoPick;
 
-            bestRobotForTask.containerFilled += bestRobotquantityToPickup;
-
             bestRobotForTask.shelf_target = n;
             bestRobotForTask.warehousenodeTarget = nodo;
 
             warehouse.setRobotRoute(bestRobotForTask.robotID, -1, nodo.nodeID);
             bestRobotForTask.RobotState = Robot.RobotStates.OnWayToPick;
+
+            bestRobotForTask.containerFilled += bestRobotquantityToPickup;
 
             Debug.Log("Robot with best metric for task: " + bestRobotForTask.robotID + " with metric: " + bestMetric);
         }
