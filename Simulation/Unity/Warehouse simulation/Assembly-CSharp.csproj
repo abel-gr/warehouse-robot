@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\CameraControl.cs" />
+    <Compile Include="Assets\DropArea.cs" />
     <Compile Include="Assets\NodesRow.cs" />
     <Compile Include="Assets\OptimalRoute.cs" />
     <Compile Include="Assets\Robot.cs" />
