@@ -5,6 +5,8 @@ from time import sleep
 from sympy import sin, cos, nsolve
 from sympy.physics.vector import init_vprinting
 from math import pi, floor, ceil, radians, degrees
+import math
+import vg
 
 init_vprinting(use_latex='mathjax', pretty_print=False)
 from sympy.physics.mechanics import dynamicsymbols
@@ -102,20 +104,32 @@ class Arm:
     def get_tip(self):
         return simxGetObjectPosition(self.clientID, self.tip, -1, simx_opmode_blocking)
 
+    def first_quadrant(self, n):
+
+        if 0 > n > -90:
+            n = n * -1
+        if -90 > n > -180:
+            n = 180 + n
+        if 180 < n < 270:
+            n = n - 180
+        if 270 < n < 360:
+            n = n - 180
+
+        return n
+
     def move_to(self, coords):
 
         p = simxGetObjectPosition(self.clientID, self.base, -1, simx_opmode_blocking)[1]
 
         # Work in progress
-        l1 = 0.26
-        l2 = 0.19056
-        l3 = 0.18837
+        l1 = 0.263
+        l2 = 0.2366
+        l3 = 0.2104
         l4 = 0.0750
 
-        eq1 = (l2 * cos(theta2) + l3 * cos(theta2 + theta3)) * cos(theta1) - coords[0]
-        eq2 = (l2 * cos(theta2) + l3 * cos(theta2 + theta3)) * sin(theta1) - coords[1]
+        eq1 = (l2 * cos(theta2) + l3 * cos(theta2 + theta3)) * cos(theta1 + pi) - coords[0]
+        eq2 = (l2 * cos(theta2) + l3 * cos(theta2 + theta3)) * sin(theta1 + pi) - coords[1]
         eq3 = l1 + l2 * sin(theta2) + l3 * sin(theta2 + theta3) - coords[2]
-
 
         succes = True
         q = [0, 0, 0]
@@ -126,47 +140,60 @@ class Arm:
             succes = False
 
         if succes:
+
             aux = list(q)
-            # Hay que establecerlos dentro de los límites de - pi y pi para que el coppelia responda
-            q[0] = q[0] - round(q[0] / (np.pi * 2)) * 2 * np.pi
-            q[1] = q[1] - round(q[1] / (np.pi * 2)) * 2 * np.pi
-            q[2] = q[2] - round(q[2] / (np.pi * 2)) * 2 * np.pi
+            print(degrees(q[0]), degrees(q[1]), degrees(q[2]))
 
             # Grados de cada eje
-            a1 = q[0] * 180 / np.pi
-            a2 = q[1] * 180 / np.pi
-            a3 = q[2] * 180 / np.pi
+            a = np.zeros(3)
 
-            # reduccion al primer quadrante
-            if 0 > a2 > -90:
-                a2 = a2 * -1
+            for i in range(3):
+                a[i] = degrees(q[i])
+                while a[i] < - 360:
+                    a[i] += 360
+                while a[i] > 360:
+                    a[i] -= 360
 
-            if -90 > a2 > -180:
-                a2 = 180 + a2
+            print(a)
 
-            if 0 > a3 > -90:
-                a3 = a3 * -1
+            if 180 < a[0] < 270:
+                a[0] = (180 - (a[0] - 180)) * -1
+            """
+            if 270 < a[0] < 360:
+                a[0] = (360 - a[0]) * -1
 
-            if -90 > a3 > -180:
-                a3 = 180 + a3
+            if -360 < a[0] < -180:
+                a[0] = (360 + a[0])
+            """
+            a[1] = self.first_quadrant(a[1])
 
-            q[0] = radians(a1) - round(q[0] / (np.pi * 2)) * 2 * np.pi
-            q[1] = radians(a2) - round(q[1] / (np.pi * 2)) * 2 * np.pi
-            q[2] = radians(a3) - round(q[2] / (np.pi * 2)) * 2 * np.pi
+            if a[1] > 90:
+                a[1] -= 90
+            if a[1] < -90:
+                a[1] += 90
 
-            o1 = np.cos(q[1]+q[2])*np.cos(q[0])
-            o2 = np.cos(q[1] + q[2]) * np.sin(q[0])
-            o3 = np.sin(q[1] + q[2])
+            a[2] = self.first_quadrant(a[2])
 
-            print(q)
-            print(a1, a2, a3)
-            print(self.direct(q))
+            print(a)
+
+            q[0] = radians(a[0])
+            q[1] = radians(a[1])
+            q[2] = radians(a[2])
+
+            o = np.array([0.0, 0.0, 0.0])
+            o[0] = math.cos(q[1] + q[2]) * math.cos(q[0] + pi)
+            o[1] = math.cos(q[1] + q[2]) * math.sin(q[0] + pi)
+            o[2] = math.sin(q[1] + q[2])
+
+            t = vg.angle(o, np.array([0, 0, -1]))
+
+            q.append(radians(t) - (pi / 2))
+            print(q[3])
+            self.direct(q)
 
     def direct(self, angles, unit='rad'):
-
         if unit == 'rad':
-            print(angles)
-            retCode = simxSetJointTargetPosition(self.clientID, self.base, angles[0], simx_opmode_oneshot)
+            retCode = simxSetJointTargetPosition(self.clientID, self.base, angles[0] + pi, simx_opmode_oneshot)
             sleep(1)
             retCode = simxSetJointTargetPosition(self.clientID, self.shoulder, angles[1],
                                                  simx_opmode_oneshot)
@@ -174,23 +201,31 @@ class Arm:
             retCode = simxSetJointTargetPosition(self.clientID, self.elbow, angles[2], simx_opmode_oneshot)
             sleep(1)
             if len(angles) > 3:
-                retCode = simxSetJointTargetPosition(self.clientID, self.wrist, -angles[3], simx_opmode_oneshot)
+                retCode = simxSetJointTargetPosition(self.clientID, self.wrist, angles[3], simx_opmode_oneshot)
         else:
-            for i, v in enumerate(angles):
-                angles[i] = v - floor(v / 360) * (pi * 2)
 
-            retCode = simxSetJointTargetPosition(self.clientID, self.base, radians(angles[0]), simx_opmode_oneshot)
+            retCode = simxSetJointTargetPosition(self.clientID, self.base, radians(angles[0]) + pi, simx_opmode_oneshot)
             sleep(1)
-            retCode = simxSetJointTargetPosition(self.clientID, self.shoulder, -radians(angles[1]),
+            retCode = simxSetJointTargetPosition(self.clientID, self.shoulder, radians(angles[1]),
                                                  simx_opmode_oneshot)
             sleep(1)
-            retCode = simxSetJointTargetPosition(self.clientID, self.elbow, -radians(angles[2]),
+            retCode = simxSetJointTargetPosition(self.clientID, self.elbow, radians(angles[2]),
                                                  simx_opmode_oneshot)
             sleep(1)
             if len(angles) > 3:
-                retCode = simxSetJointTargetPosition(self.clientID, self.wrist, -radians(angles[3]),
+                retCode = simxSetJointTargetPosition(self.clientID, self.wrist, radians(angles[3]),
                                                      simx_opmode_oneshot)
         return retCode
+
+    def home(self):
+        retCode = simxSetJointTargetPosition(self.clientID, self.base, radians(0) + pi, simx_opmode_oneshot)
+        sleep(1)
+        retCode = simxSetJointTargetPosition(self.clientID, self.shoulder, radians(31),
+                                             simx_opmode_oneshot)
+        sleep(1)
+        retCode = simxSetJointTargetPosition(self.clientID, self.elbow, radians(128),
+                                             simx_opmode_oneshot)
+        sleep(1)
 
 
 class Brain:  # It will be the main class where all the other class will be connected. It will also do all the work
