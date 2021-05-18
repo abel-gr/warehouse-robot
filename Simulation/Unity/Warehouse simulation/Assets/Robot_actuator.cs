@@ -12,6 +12,8 @@ public class Robot_actuator : MonoBehaviour
 
     public Transform suctionTransform;
 
+    public Robot robot;
+
     Warehouse_box picked_box = null;
 
     public void enableActuator()
@@ -26,7 +28,9 @@ public class Robot_actuator : MonoBehaviour
             picked_box.unpick();
 
             picked_box.transform.SetParent(boxesContainer.transform);
-            //picked_box.transform.localScale = new Vector3(0.3f, 0.1875001f, 0.5f);
+
+            robot.addBox(picked_box);
+
         }
 
         transform.localPosition = new Vector3(0, p0, 0);

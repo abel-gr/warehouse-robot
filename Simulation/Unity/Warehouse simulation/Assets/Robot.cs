@@ -46,6 +46,8 @@ public class Robot : MonoBehaviour
 
     public Transform ramp;
 
+    public Collider colliderRobot;
+
     void Start()
     {
         //positionB = transform.position;
@@ -57,6 +59,9 @@ public class Robot : MonoBehaviour
         {
             dropNode = dropArea.GetComponentInParent<Warehouse_node>();
         }
+
+        Physics.IgnoreLayerCollision(9, 10);
+        Physics.IgnoreLayerCollision(10, 10);
     }
 
     public Vector2 get2dvectortransform(Vector3 v3)
@@ -118,6 +123,25 @@ public class Robot : MonoBehaviour
                 //Debug.Log("En camino al nodo ubicado en: " + node.transform.position);
             }
         }
+    }
+
+    List<Warehouse_box> boxes = new List<Warehouse_box>();
+
+    public void addBox(Warehouse_box b)
+    {
+        boxes.Add(b);
+    }
+
+    bool unloadedBoxes = false;
+
+    public void unloadBoxes()
+    {
+        foreach (Warehouse_box box in boxes)
+        {
+            box.enableGravity();
+        }
+
+        boxes.Clear();
     }
 
     void goToDrop()
@@ -205,7 +229,7 @@ public class Robot : MonoBehaviour
 
     IEnumerator waitToUnload()
     {
-        yield return new WaitForSeconds(4.0f);
+        yield return new WaitForSeconds(0.5f);
 
         RobotState = RobotStates.RampGoingUp;
 
@@ -213,7 +237,7 @@ public class Robot : MonoBehaviour
     }
 
     const float rampUpRotation = 0.0f;
-    const float rampDownRotation = 330.0f;
+    const float rampDownRotation = 320.0f;
     Quaternion rampUpQuaternion = Quaternion.Euler(0, 90, rampUpRotation);
     Quaternion rampDownQuaternion = Quaternion.Euler(0, 90, rampDownRotation);
     float rampRotation = 0;
@@ -242,6 +266,12 @@ public class Robot : MonoBehaviour
             {
                 rampTargetRotation = rampDownRotation;
                 rampTargetQuaternion = rampDownQuaternion;
+
+                if (!unloadedBoxes)
+                {
+                    unloadedBoxes = true;
+                    unloadBoxes();
+                }
             }
             else
             {
@@ -267,6 +297,7 @@ public class Robot : MonoBehaviour
             if (!startedWaitingUnload)
             {
                 startedWaitingUnload = true;
+                unloadedBoxes = false;
                 StartCoroutine(waitToUnload());
             }
         }
@@ -457,6 +488,16 @@ public class Robot : MonoBehaviour
                     goToDrop();
                 }
             }
+        }
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        Warehouse_box r = collision.gameObject.GetComponent<Warehouse_box>();
+
+        if (r != null)
+        {
+            Physics.IgnoreCollision(collision.collider, colliderRobot);
         }
     }
 
