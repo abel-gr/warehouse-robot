@@ -23,15 +23,26 @@ public class Warehouse_shelf : MonoBehaviour
 
     public IEnumerator generateOrder()
     {
-        int tiempo = Random.Range(0, 10);
+        int tiempo = Random.Range(1, 20);
         yield return new WaitForSeconds(tiempo);
 
         if(Random.Range(0, 100) > 80)
         {
-
             products_to_pick++;
 
             Debug.Log("New order generated in node " + node1.nodeID);
+        }
+        else
+        {
+            tiempo = Random.Range(10, 80);
+            yield return new WaitForSeconds(tiempo);
+
+            if (Random.Range(0, 100) > 50)
+            {
+                products_to_pick++;
+
+                Debug.Log("New order generated in node " + node1.nodeID);
+            }
         }
 
     }
@@ -45,10 +56,13 @@ public class Warehouse_shelf : MonoBehaviour
 
     void Update()
     {
-        if (generateOrderB)
+        if (generateOrderB && !Warehouse_training.trainingMode)
         {
-            generateOrderB = false;
-            StartCoroutine(generateOrder());
+            if (warehouse_orders != null)
+            {
+                generateOrderB = false;
+                StartCoroutine(generateOrder());
+            }
         }
     }
 }

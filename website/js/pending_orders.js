@@ -33,6 +33,8 @@ function getOrdersListItems(sectionid){
 function addOrdersSections(){
     var parent = $("#list_items_orders");
 
+    parent.html("");
+
     for(var sectionID = 0; sectionID < shelve_sections; sectionID++) {
         var template = $('#order_section_template').clone();
 
@@ -62,12 +64,16 @@ function addOrdersSections(){
 function getAllOrders(){
 
     var shelve_id = 0;
+    sectionOrders = [];
+
     for(var sectionID = 0; sectionID < shelve_sections; sectionID++) {
         var orders = [];
 
         for(var i = 0; i < shelves_per_section; i++) {
-            if(shelve_orders_data[shelve_id]!="0") {
-                orders.push(shelve_orders_data[shelve_id]);
+            if (typeof shelve_orders_data[shelve_id] !== 'string' && !(shelve_orders_data[shelve_id] instanceof String)){
+                if(shelve_orders_data[shelve_id] !== undefined) {
+                    orders.push(shelve_orders_data[shelve_id]);
+                }
             }
             shelve_id++;
         }

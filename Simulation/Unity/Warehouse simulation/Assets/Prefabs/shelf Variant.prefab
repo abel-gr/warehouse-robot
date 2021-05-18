@@ -154,7 +154,7 @@ GameObject:
   - component: {fileID: 2897391654432731553}
   - component: {fileID: 255830108711304288}
   - component: {fileID: 7274867470147148205}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Box (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -169,7 +169,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1938189984996385839}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -4, z: -0.65}
+  m_LocalPosition: {x: 0, y: -4, z: -0.2599967}
   m_LocalScale: {x: 1.5, y: 1.500001, z: 1.500001}
   m_Children: []
   m_Father: {fileID: 6061902233866512841}
@@ -227,7 +227,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1938189984996385839}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 928222e77b47c554ab5d1ae8ecd9bb4a, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -249,6 +249,7 @@ MonoBehaviour:
   act: {fileID: 0}
   rig: {fileID: 7274867470147148205}
   bc: {fileID: 2897391654432731553}
+  bshelf: {fileID: 6061902233866512841}
 --- !u!54 &7274867470147148205
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -313,7 +314,7 @@ GameObject:
   - component: {fileID: 1270570221471362236}
   - component: {fileID: 5368885066413191591}
   - component: {fileID: 1594698486724091323}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -328,7 +329,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6079783833843261552}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.63, z: -0.64999986}
+  m_LocalPosition: {x: 0, y: -0.63, z: -0.26}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children: []
   m_Father: {fileID: 6061902233866512841}
@@ -386,7 +387,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6079783833843261552}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 928222e77b47c554ab5d1ae8ecd9bb4a, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -408,6 +409,7 @@ MonoBehaviour:
   act: {fileID: 0}
   rig: {fileID: 1594698486724091323}
   bc: {fileID: 1270570221471362236}
+  bshelf: {fileID: 6061902233866512841}
 --- !u!54 &1594698486724091323
 Rigidbody:
   m_ObjectHideFlags: 0

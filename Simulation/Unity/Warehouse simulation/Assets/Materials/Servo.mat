@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Floor
+  m_Name: Servo
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _SPECULARHIGHLIGHTS_OFF
   m_LightmapFlags: 4
@@ -73,5 +73,5 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.33962262, g: 0.13662203, b: 0, a: 1}
+    - _Color: {r: 0.990566, g: 0.3485736, b: 0.07008721, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
