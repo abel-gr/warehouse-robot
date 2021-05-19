@@ -1,140 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-<<<<<<< HEAD
-    <list default="true" id="f1d5d3a7-09c2-463c-9d24-6ce0b75b8e09" name="Default Changelist" comment="3d parts v2" />
-=======
-    <list default="true" id="e146f7d3-0bc2-42e0-aa65-0d150c909ea4" name="Default Changelist" comment="Botón de grabación de audio añadido" />
->>>>>>> Botón de grabación de audio añadido
+    <list default="true" id="eb8e75d7-12b2-4178-814d-7af4d73cbcab" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/warehouse-robot.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/warehouserobot.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/website/website/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/website/website/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/website/website/js/speech_to_text.js" beforeDir="false" afterPath="$PROJECT_DIR$/website/website/js/speech_to_text.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-<<<<<<< HEAD
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Python Script" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectId" id="1renvMhdWN5JX5stcm88iZb2iNi" />
-  <component name="ProjectLevelVcsManager">
-    <ConfirmationsSetting value="2" id="Add" />
+  <component name="PackageJsonUpdateNotifier">
+    <dismissed value="$PROJECT_DIR$/package.json" />
   </component>
-=======
-  <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="ProjectId" id="1s4xJ0unKYHe7YZw8w3k0Qoh2Ch" />
->>>>>>> Botón de grabación de audio añadido
+  <component name="ProjectId" id="1sRbph3HmW6S1O7dOwagrbhjtYX" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-<<<<<<< HEAD
-    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
-    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="MATLAB_INTERPRETER" value="C:\Program Files\MATLAB\R2020b\bin\matlab.exe" />
+    <property name="ACTIVE_CLOUD_PROJECT_ACCOUNT" value="javierdediosg@gmail.com" />
+    <property name="ACTIVE_CLOUD_PROJECT_ID" value="earnest-coder-312920" />
+    <property name="ACTIVE_CLOUD_PROJECT_NAME" value="WarehouseWaiter" />
+    <property name="ACTIVE_CLOUD_PROJECT_NUMBER" value="827894538552" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Simulation/Coppelia/robot.py" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
-  </component>
-  <component name="RunManager">
-    <configuration default="true" type="MatlabApplication">
-      <option name="FILE_PATH" value="" />
-      <option name="INTERPRETER_PATH" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="PARAMETERS" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
-      <module name="warehouserobot" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="C:\Users\Arnau\AppData\Local\Programs\Python\Python38\python.exe" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Simulation/Coppelia" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Simulation/Coppelia/main.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-=======
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
->>>>>>> Botón de grabación de audio añadido
+    <property name="com.google.cloudcode.ide_session_index" value="20210519_0001" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../PyCharmProjects/RLP" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-<<<<<<< HEAD
-      <changelist id="f1d5d3a7-09c2-463c-9d24-6ce0b75b8e09" name="Default Changelist" comment="" />
-      <created>1619345652811</created>
+      <changelist id="eb8e75d7-12b2-4178-814d-7af4d73cbcab" name="Default Changelist" comment="" />
+      <created>1620838533593</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1619345652811</updated>
-      <workItem from="1619345653987" duration="10000" />
-      <workItem from="1619345691590" duration="1677000" />
-      <workItem from="1619433363036" duration="6290000" />
-      <workItem from="1619611319708" duration="11587000" />
-      <workItem from="1619638964335" duration="105000" />
-      <workItem from="1619639093015" duration="82000" />
+      <updated>1620838533593</updated>
+      <workItem from="1620838534935" duration="2552000" />
+      <workItem from="1621013084792" duration="1231000" />
+      <workItem from="1621073073928" duration="41929000" />
+      <workItem from="1621157649001" duration="11264000" />
+      <workItem from="1621234420262" duration="593000" />
+      <workItem from="1621236993158" duration="5550000" />
+      <workItem from="1621324237075" duration="3943000" />
+      <workItem from="1621351164479" duration="4710000" />
+      <workItem from="1621358104369" duration="590000" />
+      <workItem from="1621435982243" duration="175000" />
+      <workItem from="1621436182836" duration="175000" />
     </task>
-    <task id="LOCAL-00001" summary="First steps on the object oriented robot library">
-      <created>1619347367334</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1619347367334</updated>
-    </task>
-    <task id="LOCAL-00002" summary="3d parts v2">
-      <created>1619639056181</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1619639056181</updated>
-    </task>
-    <option name="localTasksCounter" value="3" />
-=======
-      <changelist id="e146f7d3-0bc2-42e0-aa65-0d150c909ea4" name="Default Changelist" comment="" />
-      <created>1620145590754</created>
-      <option name="number" value="Default" />
-      <option name="presentableId" value="Default" />
-      <updated>1620145590754</updated>
-      <workItem from="1620145592870" duration="352000" />
-      <workItem from="1620145957621" duration="14258000" />
-    </task>
-    <task id="LOCAL-00001" summary="Botón de grabación de audio añadido">
-      <created>1620164117443</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1620164117443</updated>
-    </task>
-    <option name="localTasksCounter" value="2" />
->>>>>>> Botón de grabación de audio añadido
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -151,30 +79,5 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
-  </component>
-  <component name="VcsManagerConfiguration">
-<<<<<<< HEAD
-    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="First steps on the object oriented robot library" />
-    <MESSAGE value="3d parts v2" />
-    <option name="LAST_COMMIT_MESSAGE" value="3d parts v2" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Simulation/Coppelia/main.py</url>
-          <line>9</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
-  </component>
-  <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/warehouserobot$robot.coverage" NAME="main Coverage Results" MODIFIED="1619627270989" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Simulation/Coppelia" />
-=======
-    <MESSAGE value="Botón de grabación de audio añadido" />
-    <option name="LAST_COMMIT_MESSAGE" value="Botón de grabación de audio añadido" />
->>>>>>> Botón de grabación de audio añadido
   </component>
 </project>

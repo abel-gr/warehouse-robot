@@ -1,81 +1,163 @@
-URL = window.URL || window.webkitURL;
+var audio_context;
+var recorder;
+var audio_stream;
+var base64AudioFormat;
+var url;
 
-var gumStream;
-var rec;
-var input;
-var AudioContext = window.AudioContext || window.webkitAudioContext;
-var audioContext
-var recordButton = document.getElementById("recordButton");
-var stopButton = document.getElementById("stopButton");
+function Initialize() {
+    try {
+        window.AudioContext = window.AudioContext || window.webkitAudioContext;
+        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia;
+        window.URL = window.URL || window.webkitURL;
 
-recordButton.addEventListener("click", startRecording);
-stopButton.addEventListener("click", stopRecording);
+        audio_context = new AudioContext;
+        console.log('Audio context is ready!');
+        console.log('navigator.getUserMedia ' + (navigator.getUserMedia ? 'available.' : 'not present!'));
+    } catch (e) {
+        alert('No web audio support in this browser!');
+    }
+}
+
 
 function startRecording() {
-	console.log("recordButton clicked");
+    navigator.getUserMedia({ audio: true }, function (stream) {
+        audio_stream = stream;
 
-    var constraints = { audio: true, video:false }
+        var input = audio_context.createMediaStreamSource(stream);
+        console.log('Media stream succesfully created',input);
 
-	recordButton.disabled = true;
-	stopButton.disabled = false;
-	console.log("enable stop");
+        recorder = new Recorder(input,{numChannels:1});
+        console.log('Recorder initialised',recorder);
 
-	navigator.mediaDevices.getUserMedia(constraints).then(function(stream) {
-		console.log("getUserMedia() success, stream created, initializing Recorder.js ...");
-		audioContext = new AudioContext();
-		gumStream = stream;
-		input = audioContext.createMediaStreamSource(stream);
-		rec = new Recorder(input,{numChannels:1})
-		rec.record()
-		console.log("Recording started");
+        recorder && recorder.record();
+        console.log('Recording...');
 
-	}).catch(function(err) {
-		console.log("error");
-    	recordButton.disabled = false;
-    	stopButton.disabled = true;
-	});
+        document.getElementById("recordButton").disabled = true;
+        document.getElementById("stopButton").disabled = false;
+    }, function (e) {
+        console.error('No live audio input: ' + e);
+    });
+	setTimeout( function(){
+        console.log("before 1");
+        stopRecordInterval();
+      }  , 10000 );
 }
 
-function stopRecording() {
-	console.log("stopButton clicked");
-	stopButton.disabled = true;
-	recordButton.disabled = false;
-	rec.stop();
-	gumStream.getAudioTracks()[0].stop();
-	rec.exportWAV(createUploadLink);
+
+function stopRecordInterval(){
+    var _AudioFormat = "audio/wav";
+    stopRecording(function(AudioBLOB){
+
+        url = URL.createObjectURL(AudioBLOB);
+
+        console.log("blob URL",url);
+        convertToBase64(AudioBLOB);
+
+        var li = document.createElement('li');
+        var au = document.createElement('audio');
+
+        au.controls = true;
+        au.src = url;
+
+        li.appendChild(au);
+        var upload = document.createElement('a');
+	    upload.href="#";
+	    upload.innerHTML = "Upload";
+	    upload.setAttribute('id', 'uploadButton')
+
+	    li.appendChild(upload);
+        recordingsList.appendChild(li);
+
+        document.getElementById("uploadButton").addEventListener("click", function(){
+            execute();
+        },);
+
+    }, _AudioFormat);
+    console.log("after 1 sec");
 }
 
-function createUploadLink(blob) {
 
-	var url = URL.createObjectURL(blob);
-	var au = document.createElement('audio');
-	var li = document.createElement('li');
-	var link = document.createElement('a');
-	var filename = new Date().toISOString();
+function stopRecording(callback, AudioFormat) {
+    recorder && recorder.stop();
+    console.log('Stopped recording.');
 
-	au.controls = true;
-	au.src = url;
+    audio_stream.getAudioTracks()[0].stop();
 
-	li.appendChild(au);
+    document.getElementById("recordButton").disabled = false;
+    document.getElementById("stopButton").disabled = true;
 
-	var upload = document.createElement('a');
-	upload.href="#";
-	upload.innerHTML = "Upload";
-	upload.addEventListener("click", function(event){
-		  var xhr=new XMLHttpRequest();
-		  xhr.onload=function(e) {
-		      if(this.readyState === 4) {
-		          console.log("Server returned: ",e.target.responseText);
-		      }
-		  };
-		  var fd=new FormData();
-		  fd.append("audio_data",blob, filename);
-		  xhr.open("POST","upload.php",true);
-		  // TODO: cambiar el upload.php para hacerlo con firebase
-		  xhr.send(fd);
-	})
+    if(typeof(callback) == "function"){
 
-	li.appendChild(upload)//add the upload link to li
+        recorder && recorder.exportWAV(function (blob) {
+            callback(blob);
 
-	recordingsList.appendChild(li);
+            recorder.clear();
+        }, (AudioFormat || "audio/wav"));
+    }
 }
+
+
+window.onload = function(){
+    Initialize();
+
+    document.getElementById("recordButton").addEventListener("click", function(){
+        startRecording();
+    }, false);
+
+    document.getElementById("stopButton").addEventListener("click", function(){
+        var _AudioFormat = "audio/wav";
+    }, false);
+};
+
+
+function convertToBase64(blob){
+    var reader = new FileReader();
+    reader.readAsDataURL(blob);
+    reader.onloadend = function() {
+        base64data = reader.result.split(',')[1];
+        console.log(base64data);
+        base64AudioFormat=base64data;
+        console.log("base 64 data",base64AudioFormat);
+    }
+}
+
+
+function loadClient() {
+    console.log("loaded google client");
+    gapi.client.setApiKey('AIzaSyBkoelEAXC1mv_Q2e_F32mnrk8am3IUzN0');
+    return gapi.client.load("https://content.googleapis.com/discovery/v1/apis/speech/v1/rest")
+        .then(function() { console.log("GAPI client loaded for API"); },
+              function(err) { console.error("Error loading GAPI client for API", err); });
+}
+
+function execute() {
+    console.log("audio_url",url);
+    return gapi.client.speech.speech.recognize({
+      "resource": {
+        "audio": {
+                      "content": base64AudioFormat
+                },
+          "config": {
+                "encoding": "LINEAR16",
+                "languageCode": "en-US",
+                "sampleRateHertz": 44100
+
+          }
+      }
+    })
+        .then(function(response) {
+                console.log("Response", response);
+                document.getElementById("note_area").innerHTML=response.result.results[0].alternatives[0].transcript + " "
+              },
+              function(err) { console.error("Execute error", err); });
+}
+gapi.load("client",loadClient);
+/*
+  gapi.client.init({
+    'apiKey': 'AIzaSyBkoelEAXC1mv_Q2e_F32mnrk8am3IUzN0',
+
+  }).then(function(){
+    console.log("intialize the gapi with api key");
+
+});
+ */
