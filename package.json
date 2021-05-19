@@ -2,6 +2,10 @@
   "name": "RLP",
   "version": "1.0.0",
   "dependencies": {
+    "@google-cloud/text-to-speech": "^3.2.1",
     "firebase": "^8.5.0"
+  },
+  "devDependencies": {
+    "@google-cloud/speech": "^4.5.0"
   }
 }
