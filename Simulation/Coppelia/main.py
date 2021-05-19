@@ -6,11 +6,15 @@ from time import sleep
 b = Brain()
 # b.turn_right()
 # b.arm.direct([-90, 90, 0], unit='deg')
-""""""
-b.arm.move_to([-0.325, -0.1, 0.2])  # esquerra
 
+b.take_package([-0.275, -0.1, 0.237])
+b.drop_package()
+b.legs.forward(3)
+"""
 sleep(2)
-b.arm.setEffector(1)
-b.arm.direct([-90, 31, 128], unit='deg')
 
-
+im = b.sensors.getImage()
+plt.figure(1)
+plt.imshow(im.matrix)
+plt.show()
+"""
