@@ -7,6 +7,7 @@ from sympy.physics.vector import init_vprinting
 from math import pi, floor, ceil, radians, degrees, atan2, acos, sqrt
 import math
 import vg
+from random import randint
 
 init_vprinting(use_latex='mathjax', pretty_print=False)
 from sympy.physics.mechanics import dynamicsymbols
@@ -27,11 +28,13 @@ class Image:
 
 
 class Sensors:
-    def __init__(self, clientID, cam, psensor, body):
+    def __init__(self, clientID, cam, psensor, body, sensor_left, sensor_right):
         self.clientID = clientID
         self.cam = cam
         self.psensor = psensor
         self.body = body
+        self.sensorl = sensor_left
+        self.sensorr = sensor_right
 
         print(psensor)
 
@@ -39,15 +42,17 @@ class Sensors:
         retCode, res, image = simxGetVisionSensorImage(self.clientID, self.cam, 0, simx_opmode_oneshot_wait)
         return Image(image, res)
 
-    def getDistance(self):
+    def getDistance(self, t_sensor):
         retCode, detectionState, detectedPoint, detectedObjectHandle, detectedSurfaceNormalVector = simxReadProximitySensor(
-            self.clientID, self.psensor, simx_opmode_blocking)
+            self.clientID, t_sensor, simx_opmode_blocking)
         print(retCode)
-        if detectionState:
+        sensor_val = -1
+        if detectionState == True:
             sensor_val = np.linalg.norm(detectedPoint)
             print("distacia al objeto: ", sensor_val)
         else:
             print("No ha detectado objeto")
+        return sensor_val
 
     def yaw(self):
         ret, bd = simxGetObjectOrientation(self.clientID, self.body, -1, simx_opmode_blocking)
@@ -61,17 +66,53 @@ class Legs:
         self.right_wheel = right_wheel
         self.left_wheel = left_wheel
 
+        ret_codes = np.zeros(13)
+        ret_codes[0], self.obj = simxGetObjectHandle(self.clientID, 'Robot', simx_opmode_blocking)
+        ret_codes[1], self.cam = simxGetObjectHandle(self.clientID, 'Vision_sensor', simx_opmode_blocking)
+        ret_codes[2], self.psensor = simxGetObjectHandle(self.clientID, 'Psensor', simx_opmode_blocking)
+        ret_codes[3], self.bdummy = simxGetObjectHandle(self.clientID, 'Back_dummy', simx_opmode_blocking)
+        ret_codes[4], self.fdummy = simxGetObjectHandle(self.clientID, 'Front_dummy', simx_opmode_blocking)
+        ret_codes[5], self.sensor_left = simxGetObjectHandle(self.clientID, 'sensor_left', simx_opmode_blocking)
+        ret_codes[6], self.sensor_right = simxGetObjectHandle(self.clientID, 'sensor_right', simx_opmode_blocking)
+
+        assert not all(ret_codes)
+
+        self.sensors = Sensors(self.clientID, self.cam, self.psensor, self.bdummy, self.fdummy, self.obj)
+
+    def forward(self, speed, b):
+        op = 1
+        simxSetJointTargetVelocity(self.clientID, self.left_wheel, speed, simx_opmode_streaming)
+        simxSetJointTargetVelocity(self.clientID, self.right_wheel, speed, simx_opmode_streaming)
+        b.distance_side()
+        b.check_proximity(op)
+
     def forward(self, speed):
         simxSetJointTargetVelocity(self.clientID, self.left_wheel, speed, simx_opmode_streaming)
         simxSetJointTargetVelocity(self.clientID, self.right_wheel, speed, simx_opmode_streaming)
 
-    def turn_left(self, speed):
-        ret = simxSetJointTargetVelocity(self.clientID, self.left_wheel, speed, simx_opmode_streaming)
-        ret = simxSetJointTargetVelocity(self.clientID, self.right_wheel, -speed, simx_opmode_streaming)
+    def turn_left(self, speed, required, b):
+        distance = self.sensors.getDistance(self.psensor)
+        while (distance > 0.7 or distance == -1 or required):
+            distance = self.sensors.getDistance(self.psensor)
+            ret = simxSetJointTargetVelocity(self.clientID, self.left_wheel, speed, simx_opmode_streaming)
+            ret = simxSetJointTargetVelocity(self.clientID, self.right_wheel, -speed, simx_opmode_streaming)
+            if required:
+                sleep(1)
+            required = False
+            sleep(0.3)
+            b.check_proximity(1)
 
-    def turn_right(self, speed):
-        ret = simxSetJointTargetVelocity(self.clientID, self.left_wheel, -speed, simx_opmode_streaming)
-        ret = simxSetJointTargetVelocity(self.clientID, self.right_wheel, speed, simx_opmode_streaming)
+    def turn_right(self, speed, required, b):
+        distance = self.sensors.getDistance(self.psensor)
+        while (distance > 0.7 or distance == -1 or required):
+            distance = self.sensors.getDistance(self.psensor)
+            ret = simxSetJointTargetVelocity(self.clientID, self.left_wheel, -speed, simx_opmode_streaming)
+            ret = simxSetJointTargetVelocity(self.clientID, self.right_wheel, speed, simx_opmode_streaming)
+            if required:
+                sleep(1)
+            required = False
+            sleep(0.3)
+            b.check_proximity(2)
 
     def stop(self):
         simxSetJointTargetVelocity(self.clientID, self.left_wheel, 0.0, simx_opmode_streaming)
@@ -89,7 +130,6 @@ class Arm:
         self.wrist = wrist
         self.tip = arm_tip
         self.angles = [-90, -60, -130, -100]
-        self.forward()
 
     def setEffector(self, val):
         # función que acciona el efector final remotamente
@@ -217,7 +257,7 @@ class Brain:  # It will be the main class where all the other class will be conn
         assert self.clientID != -1
         self.axis = np.array([0, 0, 0])
         self.arm_home = [-90, 90, 0]
-        ret_codes = np.zeros(13)
+        ret_codes = np.zeros(14)
         ret_codes[0], self.obj = simxGetObjectHandle(self.clientID, 'Robot', simx_opmode_blocking)
         ret_codes[1], self.base = simxGetObjectHandle(self.clientID, 'Base_joint', simx_opmode_blocking)
         ret_codes[2], self.shoulder = simxGetObjectHandle(self.clientID, 'Shoulder_joint', simx_opmode_blocking)
@@ -230,18 +270,23 @@ class Brain:  # It will be the main class where all the other class will be conn
         ret_codes[9], self.pad = simxGetObjectHandle(self.clientID, 'suctionPad', simx_opmode_blocking)
         ret_codes[10], self.psensor = simxGetObjectHandle(self.clientID, 'Psensor', simx_opmode_blocking)
         ret_codes[11], self.backpack = simxGetObjectHandle(self.clientID, 'Backpack', simx_opmode_blocking)
+        ret_codes[12], self.sensor_left = simxGetObjectHandle(self.clientID, 'sensor_left', simx_opmode_blocking)
+        ret_codes[13], self.sensor_right = simxGetObjectHandle(self.clientID, 'sensor_right', simx_opmode_blocking)
 
         assert not all(ret_codes)
 
         self.arm = Arm(self.clientID, self.base, self.shoulder, self.elbow, self.wrist, self.arm_tip)
         self.legs = Legs(self.clientID, self.left_wheel, self.right_wheel)
-        self.sensors = Sensors(self.clientID, self.cam, self.psensor, self.obj)
+        self.sensors = Sensors(self.clientID, self.cam, self.psensor, self.obj, self.sensor_left, self.sensor_right)
+        self.sensorl = Sensors(self.clientID, self.cam, self.sensor_left, self.obj, self.sensor_left, self.sensor_right)
+        self.sensorr = Sensors(self.clientID, self.cam, self.sensor_right, self.obj, self.sensor_left,
+                               self.sensor_right)
 
         print("Initialization completed, connection established")
 
     def turn_left(self):
         self.check()
-        self.legs.turn_left(1)
+        self.legs.turn_left(1, False)
         deg = self.sensors.yaw()
         stop = 88
         if deg < 0 and self.axis[2] == 180:
@@ -269,7 +314,7 @@ class Brain:  # It will be the main class where all the other class will be conn
 
     def turn_right(self):
         self.check()
-        self.legs.turn_right(1)
+        self.legs.turn_right(1, False)
         deg = self.sensors.yaw()
         stop = 88
         if deg < 0 and self.axis[2] == 180:
@@ -320,15 +365,39 @@ class Brain:  # It will be the main class where all the other class will be conn
                 r = deg - self.axis[2]
             if r < 0:
                 self.corr += np.abs(r)
-                self.legs.turn_left(0.5)
+                self.legs.turn_left(0.5, False)
                 sleep(0.1 * np.abs(r))
                 self.legs.stop()
             else:
                 self.corr += np.abs(r)
-                self.legs.turn_right(0.5)
+                self.legs.turn_right(0.5, False)
                 sleep(0.1 * np.abs(r))
                 self.legs.stop()
             self.check()
+
+    def check_proximity(self, op):
+        distance = self.sensors.getDistance(self.psensor)
+        dist_l = self.sensorl.getDistance(self.sensor_left)
+        dist_r = self.sensorr.getDistance(self.sensor_right)
+
+        if (op == 1):  # forward
+            if (distance > 0 and distance < 0.8):
+                self.legs.turn_right(5, False, self)
+            else:
+                self.legs.forward(10, self)
+        elif op == 2:  # right
+            if (distance > 0 and distance < 0.8):
+                self.legs.turn_left(5, False, self)
+            else:
+                self.legs.forward(10, self)
+
+    def distance_side(self):
+        dist_l = self.sensorl.getDistance(self.sensor_left)
+        dist_r = self.sensorr.getDistance(self.sensor_right)
+        dist = self.sensors.getDistance(self.psensor)
+        print('laterals -----------------')
+        print(dist_l)
+        print(dist_r)
 
 
 """
