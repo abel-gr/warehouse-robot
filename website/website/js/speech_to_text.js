@@ -133,17 +133,16 @@ function loadClient() {
 function execute() {
     console.log("audio_url",url);
     return gapi.client.speech.speech.recognize({
-      "resource": {
-        "audio": {
-                      "content": base64AudioFormat
-                },
-          "config": {
+        "resource": {
+            "audio": {
+                "content": base64AudioFormat
+            },
+            "config": {
                 "encoding": "LINEAR16",
                 "languageCode": "en-US",
                 "sampleRateHertz": 44100
-
-          }
-      }
+            }
+        }
     })
         .then(function(response) {
                 console.log("Response", response);
