@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="eb8e75d7-12b2-4178-814d-7af4d73cbcab" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/warehouse-robot.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/warehouserobot.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+    <list default="true" id="eb8e75d7-12b2-4178-814d-7af4d73cbcab" name="Default Changelist" comment="language selection added">
       <change beforePath="$PROJECT_DIR$/website/website/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/website/website/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/website/js/speech_to_text.js" beforeDir="false" afterPath="$PROJECT_DIR$/website/website/js/speech_to_text.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -38,7 +36,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="com.google.cloudcode.ide_session_index" value="20210519_0001" />
+    <property name="com.google.cloudcode.ide_session_index" value="20210520_0000" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../PyCharmProjects/RLP" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
@@ -62,7 +60,31 @@
       <workItem from="1621358104369" duration="590000" />
       <workItem from="1621435982243" duration="175000" />
       <workItem from="1621436182836" duration="175000" />
+      <workItem from="1621436430629" duration="1149000" />
+      <workItem from="1621502978380" duration="2679000" />
     </task>
+    <task id="LOCAL-00001" summary="speech to text added (not wroking yet)">
+      <created>1621436484981</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1621436484981</updated>
+    </task>
+    <task id="LOCAL-00002" summary="speech to text added (not wroking yet)">
+      <created>1621436577226</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1621436577226</updated>
+    </task>
+    <task id="LOCAL-00003" summary="language selection added">
+      <created>1621505577880</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1621505577880</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -79,5 +101,10 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="speech to text added (not wroking yet)" />
+    <MESSAGE value="language selection added" />
+    <option name="LAST_COMMIT_MESSAGE" value="language selection added" />
   </component>
 </project>
