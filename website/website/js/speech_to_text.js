@@ -4,6 +4,12 @@ var audio_stream;
 var base64AudioFormat;
 var url;
 
+function saveVoiceOrderToDB(shelfID, quantity){
+
+    addOrderWithQuantity(shelfID, -1, -1, quantity);
+
+}
+
 function Initialize() {
     try {
         window.AudioContext = window.AudioContext || window.webkitAudioContext;

@@ -96,7 +96,7 @@ function loadDatabaseDatainMap(sectionDataDB){
             orderState = sectionDataDB[0][sectionID_a + k.toString()][shelfID_a + j.toString()]["orderState"];
             stock = sectionDataDB[0][sectionID_a + k.toString()][shelfID_a + j.toString()]["stock"];
 
-            console.log(k, sectionID_a + k.toString(), shelfID_a + j.toString(), incomplete_orders, orderState, stock);
+            //console.log(k, sectionID_a + k.toString(), shelfID_a + j.toString(), incomplete_orders, orderState, stock);
 
             if (j < shelves_per_section) {
                 j++;

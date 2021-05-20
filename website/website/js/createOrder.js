@@ -1,7 +1,27 @@
 
 
 function saveOrderToDB(data){
-    // TODO: Guardar el nuevo pedido en la base de datos
+
+    try {
+
+        var dID = parseInt(data["shelfID"]);
+        var shelf_gID = Math.floor(dID / shelves_per_section);
+
+        var sectionDir = (shelf_gID + 1).toString();
+        var shelfDir = ((dID - shelf_gID * shelves_per_section) + 1).toString();
+
+        var inc_ord = shelve_orders[dID];
+
+        var dir = 'shelves/sections/section' + sectionDir + "/shelf" + shelfDir;
+
+        firebase.database().ref(dir).update({
+            incomplete_orders: inc_ord,
+            orderState: 0,
+        });
+
+    }catch(e){
+
+    }
 }
 
 function calculateSectionIDByShelfID(id){
@@ -9,11 +29,12 @@ function calculateSectionIDByShelfID(id){
 }
 
 function addOrder(data){
-    var id = data["shelfID"];
-    var destinationID = data["destinationID"];
-    var productID = data["productID"];
+    addOrderWithQuantity(data["shelfID"], data["destinationID"], data["productID"], 1);
+}
 
-    shelve_orders[id] = shelve_orders[id] + 1;
+function addOrderWithQuantity(id, destinationID, productID, quantity){
+
+    shelve_orders[id] = shelve_orders[id] + quantity;
 
     var incomplete_orders = shelve_orders[id];
     var stock = shelve_stocks[id];
