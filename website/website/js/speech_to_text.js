@@ -3,6 +3,7 @@ var recorder;
 var audio_stream;
 var base64AudioFormat;
 var url;
+var language = "en-US";
 
 function Initialize() {
     try {
@@ -131,7 +132,11 @@ function loadClient() {
 }
 
 function execute() {
-    console.log("audio_url",url);
+    var slectedLan = document.getElementById("language-selection");
+    language = slectedLan.value;
+    console.log("selected_language:",url);
+
+    console.log("audio_url:",url);
     return gapi.client.speech.speech.recognize({
         "resource": {
             "audio": {
@@ -139,7 +144,7 @@ function execute() {
             },
             "config": {
                 "encoding": "LINEAR16",
-                "languageCode": "en-US",
+                "languageCode": language,
                 "sampleRateHertz": 44100
             }
         }
