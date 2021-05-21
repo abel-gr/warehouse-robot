@@ -89,18 +89,21 @@ async function sendOrder() {
     language = selectedLan.value;
     console.log("selected_language:",language);
 
-    const url = 'https://europe-west1-earnest-coder-312920.cloudfunctions.net/Speech-to-Text';
-    const req = {
+    const urlSTT = 'https://europe-west1-earnest-coder-312920.cloudfunctions.net/Speech-to-Text';
+    const reqSTT = {
         audio: base64AudioFormat,
         lan: language
     }
-	const response = await fetch(url, {
+	const response = await fetch(urlSTT, {
 		method: 'POST',
-		body: JSON.stringify(req),
+		body: JSON.stringify(reqSTT),
 		headers: {
 			'Content-Type': 'application/json',
 			'Accept': 'application/json'
 		}
-	}).then(res => res.text());
-    console.log(response);
+	}).then(resSTT => resSTT.text());
+    console.log(response); //AQUI TIENES EL RESULTADO DE SPEECH TO TEXT
+
+
+	//AQUI PUEDES HACER OTRA LLAMADA PARA EL VERTEXIA
 }
