@@ -212,7 +212,7 @@ def ClassifyLettersNumbers(imgs):
                         
         else:
             
-            if (meanval1 - prevMeanVal1) > (dataset_images_sizeX * 0.3):
+            if (meanval1 - prevMeanVal1) > (dataset_images_sizeX * 0.35):
                 
                 ln = ln + ' '
             
