@@ -94,7 +94,7 @@ async function sendOrder() {
         audio: base64AudioFormat,
         lan: language
     }
-	const response = await fetch(urlSTT, {
+	const responseSST = await fetch(urlSTT, {
 		method: 'POST',
 		body: JSON.stringify(reqSTT),
 		headers: {
@@ -102,8 +102,22 @@ async function sendOrder() {
 			'Accept': 'application/json'
 		}
 	}).then(resSTT => resSTT.text());
-    console.log(response); //AQUI TIENES EL RESULTADO DE SPEECH TO TEXT
+    console.log(responseSST);
 
 
-	//AQUI PUEDES HACER OTRA LLAMADA PARA EL VERTEXIA
+	const urlAI = 'https://europe-west1-earnest-coder-312920.cloudfunctions.net/Vertex-AI';	//ESTA ES LA URL DE LA API
+    const reqAI = {																			//ESTE ES EL JSON QUE CONTIENE LO QUE QUIERAS PASAR A LA API
+        text: responseSST,
+    }
+    const responseAI = await fetch(urlAI, {												//CONEXION FETCH PARA HACER EL POST
+		method: 'POST',
+		body: JSON.stringify(reqAI),
+		headers: {
+			'Content-Type': 'application/json',
+			'Accept': 'application/json'
+		}
+	}).then(resAI => resAI.text());
+    console.log(responseAI); 																//AQUI TE LLEGARA TU RESPUESTA
+
+
 }

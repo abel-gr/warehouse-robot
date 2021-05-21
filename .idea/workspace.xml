@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="eb8e75d7-12b2-4178-814d-7af4d73cbcab" name="Default Changelist" comment="speech to text working">
+    <list default="true" id="eb8e75d7-12b2-4178-814d-7af4d73cbcab" name="Default Changelist" comment="speech to text working +">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/website/website/js/speech_to_text.js" beforeDir="false" afterPath="$PROJECT_DIR$/website/website/js/speech_to_text.js" afterDir="false" />
     </list>
@@ -37,7 +37,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="com.google.cloudcode.ide_session_index" value="20210521_0015" />
+    <property name="com.google.cloudcode.ide_session_index" value="20210521_0016" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../PyCharmProjects/RLP" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
@@ -65,7 +65,7 @@
       <workItem from="1621502978380" duration="13410000" />
       <workItem from="1621581150952" duration="5224000" />
       <workItem from="1621591315243" duration="7400000" />
-      <workItem from="1621614053415" duration="2567000" />
+      <workItem from="1621614053415" duration="3745000" />
     </task>
     <task id="LOCAL-00001" summary="speech to text added (not wroking yet)">
       <created>1621436484981</created>
@@ -102,7 +102,14 @@
       <option name="project" value="LOCAL" />
       <updated>1621614111332</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="speech to text working +">
+      <created>1621624413963</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1621624413963</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -125,6 +132,7 @@
     <MESSAGE value="language selection added" />
     <MESSAGE value="comment" />
     <MESSAGE value="speech to text working" />
-    <option name="LAST_COMMIT_MESSAGE" value="speech to text working" />
+    <MESSAGE value="speech to text working +" />
+    <option name="LAST_COMMIT_MESSAGE" value="speech to text working +" />
   </component>
 </project>
