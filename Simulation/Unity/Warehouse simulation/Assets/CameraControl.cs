@@ -11,6 +11,8 @@ public class CameraControl : MonoBehaviour
     float rotationX = 0;
     float rotationY = 0;
 
+    public bool fastMode = true;
+
     void Start()
     {
         rotationX = transform.localRotation.x;
@@ -79,6 +81,24 @@ public class CameraControl : MonoBehaviour
             if (transform.position.y > 2* verticalSpeed * Time.deltaTime)
             {
                 transform.Translate(Vector3.down * verticalSpeed * Time.deltaTime, Space.World);
+            }
+        }
+
+        if (Input.GetKey(KeyCode.V))
+        {
+            fastMode = !fastMode;
+
+            if (fastMode)
+            {
+                rotateSpeed = 150f;
+                moveSpeed = 50f;
+                verticalSpeed = 25f;
+            }
+            else
+            {
+                rotateSpeed = 60f;
+                moveSpeed = 10f;
+                verticalSpeed = 10f;
             }
         }
 
