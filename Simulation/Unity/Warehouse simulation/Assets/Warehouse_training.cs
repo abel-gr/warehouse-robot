@@ -34,7 +34,7 @@ public class Warehouse_training : MonoBehaviour
     private void newWeights()
     {
         variable_learning_rate = Random.Range(-10.0f, 10.0f);
-        warehouse_Orders.formula_weights.distance -= variable_learning_rate * (1/ iteration_elapsed_time);
+        warehouse_Orders.formula_weights.distance -= variable_learning_rate * (1 / iteration_elapsed_time);
 
         variable_learning_rate = Random.Range(-10.0f, 10.0f);
         warehouse_Orders.formula_weights.quantityToPickup -= variable_learning_rate * (1 / iteration_elapsed_time);
@@ -71,12 +71,13 @@ public class Warehouse_training : MonoBehaviour
         }
     }
 
-    
+    int ordersPerIteration = 10;
+
     void Update()
     {
         if (trainingMode)
         {
-            if (robotsFinished >= warehouse.robots.Length * 2)
+            if (robotsFinished >= ordersPerIteration)
             {
                 robotsFinished = 0;
 
