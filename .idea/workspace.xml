@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="eb8e75d7-12b2-4178-814d-7af4d73cbcab" name="Default Changelist" comment="speech to text working + intro vertex ia">
+    <list default="true" id="eb8e75d7-12b2-4178-814d-7af4d73cbcab" name="Default Changelist" comment="voice prompts div updated">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/website/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/website/website/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/website/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/website/website/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/website/website/js/speech_to_text.js" beforeDir="false" afterPath="$PROJECT_DIR$/website/website/js/speech_to_text.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -68,7 +66,7 @@
       <workItem from="1621581150952" duration="5224000" />
       <workItem from="1621591315243" duration="7400000" />
       <workItem from="1621614053415" duration="3921000" />
-      <workItem from="1621801681150" duration="2172000" />
+      <workItem from="1621801681150" duration="3212000" />
     </task>
     <task id="LOCAL-00001" summary="speech to text added (not wroking yet)">
       <created>1621436484981</created>
@@ -119,7 +117,14 @@
       <option name="project" value="LOCAL" />
       <updated>1621628513032</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="voice prompts div updated">
+      <created>1621803904279</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1621803904279</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -144,6 +149,7 @@
     <MESSAGE value="speech to text working" />
     <MESSAGE value="speech to text working +" />
     <MESSAGE value="speech to text working + intro vertex ia" />
-    <option name="LAST_COMMIT_MESSAGE" value="speech to text working + intro vertex ia" />
+    <MESSAGE value="voice prompts div updated" />
+    <option name="LAST_COMMIT_MESSAGE" value="voice prompts div updated" />
   </component>
 </project>

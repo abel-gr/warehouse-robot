@@ -84,8 +84,9 @@ function createUploadBtn(blob) {
 
 	var remove = document.createElement('a');
 	remove.href="#";
-	remove.innerHTML = "Remove";
+	remove.innerHTML = "Cancel";
 	remove.setAttribute('id', 'removeButton')
+	remove.style.color = 'red';
 
 	li.appendChild(upload);
 	li.appendChild(document.createTextNode (" "))
