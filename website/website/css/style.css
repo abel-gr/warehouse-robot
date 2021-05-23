@@ -18,6 +18,9 @@ body{
                          "info map orders";
 }
 
+li{
+    list-style: none;
+}
 
 #container_shelves{
     width: 100%;

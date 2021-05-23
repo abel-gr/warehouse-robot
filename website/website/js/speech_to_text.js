@@ -45,6 +45,12 @@ function stopRecording() {
 	rec.stop();
 	gumStream.getAudioTracks()[0].stop();
 	rec.exportWAV(createUploadBtn);
+
+	var ul = document.getElementById('recordingsList');
+	if (ul) {
+		while (ul.firstChild) {
+			ul.removeChild(ul.firstChild);
+	} 	}
 }
 
 function convertToBase64(blob){
@@ -68,6 +74,7 @@ function createUploadBtn(blob) {
 
 	au.controls = true;
 	au.src = url;
+	au.setAttribute('id', 'audioSrc')
 	li.appendChild(au);
 
 	var upload = document.createElement('a');
@@ -75,11 +82,22 @@ function createUploadBtn(blob) {
 	upload.innerHTML = "Upload";
 	upload.setAttribute('id', 'uploadButton')
 
+	var remove = document.createElement('a');
+	remove.href="#";
+	remove.innerHTML = "Remove";
+	remove.setAttribute('id', 'removeButton')
+
 	li.appendChild(upload);
+	li.appendChild(document.createTextNode (" "))
+	li.appendChild(remove);
 	recordingsList.appendChild(li);
 
 	document.getElementById("uploadButton").addEventListener("click", function(){
 		sendOrder();
+	},);
+
+	document.getElementById("removeButton").addEventListener("click", function(){
+		li.parentNode.removeChild(li);
 	},);
 }
 
