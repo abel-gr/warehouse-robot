@@ -102,8 +102,9 @@ async function sendOrder() {
 			'Accept': 'application/json'
 		}
 	}).then(resSTT => resSTT.text());
-    console.log(responseSST);
 
+	var STTmsg = 'You said: ' + responseSST ;
+	window.alert(STTmsg);
 
 	const urlAI = 'https://europe-west1-earnest-coder-312920.cloudfunctions.net/Vertex-AI';	//ESTA ES LA URL DE LA API
     const reqAI = {																			//ESTE ES EL JSON QUE CONTIENE LO QUE QUIERAS PASAR A LA API
@@ -119,5 +120,5 @@ async function sendOrder() {
 	}).then(resAI => resAI.text());
     console.log(responseAI); 																//AQUI TE LLEGARA TU RESPUESTA
 
-
+	//saveVoiceOrderToDB(shelfID, quantity)
 }
