@@ -183,7 +183,7 @@ class Arm:
             self.direct([Axis1Grados, Axis2Grados, Axis3Grados, -60], unit='deg')
             sleep(0.2)
             Axis4Grados = 180 - Axis2Grados - Axis3Grados
-            print(Axis1Grados, Axis2Grados, Axis3Grados, Axis4Grados)
+            # print(Axis1Grados, Axis2Grados, Axis3Grados, Axis4Grados)
             self.direct([Axis1Grados, Axis2Grados, Axis3Grados, Axis4Grados], unit='deg')
 
         except:
@@ -310,6 +310,7 @@ class Brain:  # It will be the main class where all the other class will be conn
         info = info.replace(' ', '')
         info = info.replace('O', '0')
         info = info.replace('\n', '')
+        print(info)
         self.boxes[slot-1].id = info
         self.take_package(coords, slot)
 

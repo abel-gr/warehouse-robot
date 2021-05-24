@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 import cv2
 
 # Train the MLP (only need to do it once as it saves the model in a file, so now it is commented)
-# LetNumClassif.train('dataset/fonts')
+LetNumClassif.train('dataset/fonts')
 
 img = Image.open('dataset/labels/numbers4.png')
 img = np.asarray(img, dtype=np.float32)
