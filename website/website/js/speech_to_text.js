@@ -136,8 +136,8 @@ async function sendOrder() {
 			'Content-Type': 'application/json',
 			'Accept': 'application/json'
 		}
-	}).then(resAI => resAI.text());
+	}).then(resAI => resAI.json());
     console.log(responseAI); 																//AQUI TE LLEGARA TU RESPUESTA
 
-	//saveVoiceOrderToDB(shelfID, quantity)
+	saveVoiceOrderToDB(responseAI.shelf, responseAI.product_quantity);
 }
