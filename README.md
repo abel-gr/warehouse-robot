@@ -171,23 +171,23 @@ These are some of the parts that form the robot:
 
 * Base & Basket:
 <img src="https://github.com/abel-gr/warehouse-robot/blob/04acbda1ea0180f17e8066a65f9a8585afba3a3b/imgs/3d/base.png" alt="3dBase" width="300"/>
-<img align="right" src="https://github.com/abel-gr/warehouse-robot/blob/04acbda1ea0180f17e8066a65f9a8585afba3a3b/imgs/3d/basket.png" alt="3dBasket" width="300"/>
+<img src="https://github.com/abel-gr/warehouse-robot/blob/04acbda1ea0180f17e8066a65f9a8585afba3a3b/imgs/3d/basket.png" alt="3dBasket" width="300"/>
 
 * Basecone & Shoulder plate:
 <img src="https://github.com/abel-gr/warehouse-robot/blob/04acbda1ea0180f17e8066a65f9a8585afba3a3b/imgs/3d/basecone.png" alt="3dbasecone" width="300"/>
-<img align="right" src="https://github.com/abel-gr/warehouse-robot/blob/04acbda1ea0180f17e8066a65f9a8585afba3a3b/imgs/3d/shoulderplate.png" alt="3dshoulderplate" width="300"/>
+<img src="https://github.com/abel-gr/warehouse-robot/blob/04acbda1ea0180f17e8066a65f9a8585afba3a3b/imgs/3d/shoulderplate.png" alt="3dshoulderplate" width="300"/>
 
 * Shoulder shell & Forearm:
 <img src="https://github.com/abel-gr/warehouse-robot/blob/04acbda1ea0180f17e8066a65f9a8585afba3a3b/imgs/3d/shouldershell.png" alt="3dshouldershell" width="300"/>
-<img align="right" src="https://github.com/abel-gr/warehouse-robot/blob/04acbda1ea0180f17e8066a65f9a8585afba3a3b/imgs/3d/forearm.png" alt="3dforearm" width="300"/>
+<img src="https://github.com/abel-gr/warehouse-robot/blob/04acbda1ea0180f17e8066a65f9a8585afba3a3b/imgs/3d/forearm.png" alt="3dforearm" width="300"/>
 
 * Elbow shell & Upper arm:
 <img src="https://github.com/abel-gr/warehouse-robot/blob/04acbda1ea0180f17e8066a65f9a8585afba3a3b/imgs/3d/elbowshell.png" alt="3delbowshell" width="300"/>
-<img align="right" src="https://github.com/abel-gr/warehouse-robot/blob/04acbda1ea0180f17e8066a65f9a8585afba3a3b/imgs/3d/upperarm.png" alt="3dupperarm" width="300"/>
+<img src="https://github.com/abel-gr/warehouse-robot/blob/04acbda1ea0180f17e8066a65f9a8585afba3a3b/imgs/3d/upperarm.png" alt="3dupperarm" width="300"/>
 
 * Wirst shell & Shorter upper arm:
 <img src="https://github.com/abel-gr/warehouse-robot/blob/04acbda1ea0180f17e8066a65f9a8585afba3a3b/imgs/3d/wirstshell.png" alt="3dwirstshell" width="300"/>
-<img align="right" src="https://github.com/abel-gr/warehouse-robot/blob/04acbda1ea0180f17e8066a65f9a8585afba3a3b/imgs/3d/shorter_upperarm.png" alt="3dshorterupperarm" width="300"/>
+<img src="https://github.com/abel-gr/warehouse-robot/blob/04acbda1ea0180f17e8066a65f9a8585afba3a3b/imgs/3d/shorter_upperarm.png" alt="3dshorterupperarm" width="300"/>
 
 # Video
 A short video showing all the functionalities of the project.
