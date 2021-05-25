@@ -2,11 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="eb8e75d7-12b2-4178-814d-7af4d73cbcab" name="Default Changelist" comment="voice prompts div updated">
-      <change afterPath="$PROJECT_DIR$/Simulation/Coppelia/post-segment.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Simulation/Coppelia/pre-segment.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Simulation/Coppelia/README.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Simulation/Coppelia/cinematica_inversa.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Simulation/Coppelia/screenshots/demo_code.JPG" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Simulation/Coppelia/robot.py" beforeDir="false" afterPath="$PROJECT_DIR$/Simulation/Coppelia/robot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Simulation/Coppelia/simulation_scene.ttt" beforeDir="false" afterPath="$PROJECT_DIR$/Simulation/Coppelia/simulation_scene.ttt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Simulation/Coppelia/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Simulation/Coppelia/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,7 +23,13 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Simulation/Coppelia/main.py" root0="SKIP_HIGHLIGHTING" />
+  </component>
   <component name="ProjectId" id="1sRbph3HmW6S1O7dOwagrbhjtYX" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -33,6 +39,8 @@
     <property name="ACTIVE_CLOUD_PROJECT_ID" value="earnest-coder-312920" />
     <property name="ACTIVE_CLOUD_PROJECT_NAME" value="WarehouseWaiter" />
     <property name="ACTIVE_CLOUD_PROJECT_NUMBER" value="827894538552" />
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="MATLAB_INTERPRETER" value="C:\Program Files\MATLAB\R2020b\bin\matlab.exe" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
@@ -43,6 +51,15 @@
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RunManager">
+    <configuration default="true" type="MatlabApplication">
+      <option name="FILE_PATH" value="" />
+      <option name="INTERPRETER_PATH" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="PARAMETERS" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="robot" type="PythonConfigurationType" factoryName="Python">
       <module name="warehouse-robot" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -92,7 +109,7 @@
       <workItem from="1621614053415" duration="3921000" />
       <workItem from="1621801681150" duration="3999000" />
       <workItem from="1621848523778" duration="34000" />
-      <workItem from="1621946166020" duration="6445000" />
+      <workItem from="1621946166020" duration="8620000" />
     </task>
     <task id="LOCAL-00001" summary="speech to text added (not wroking yet)">
       <created>1621436484981</created>
@@ -169,6 +186,7 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="speech to text added (not wroking yet)" />
     <MESSAGE value="language selection added" />
     <MESSAGE value="comment" />
