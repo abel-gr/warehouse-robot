@@ -67,6 +67,7 @@ li{
     width: 100%;
     height: 10%;
     margin: 10px;
+    padding-top: 20px;
     grid-area: info;
 }
 
@@ -83,14 +84,15 @@ li{
 
 #voiceCard{
     display: block;
-    position: inherit;
-    overflow: visible;
+    position: relative;
+    overflow: auto;
     z-index: 100;
     width: 100%;
     height: 100%;
     margin: 10px;
     grid-area: voicecard;
     padding-right: 10px;
+    padding-bottom: 60px;
 }
 
 .text_insidecard{
@@ -102,10 +104,10 @@ li{
 #ordersList{
     display: block;
     position: inherit;
-    overflow: visible;
+    overflow: auto;
     z-index: 100;
     width: 100%;
-    height: 10%;
+    height: 100%;
     margin: 10px;
     padding-right: 10px;
     grid-area: orders;
