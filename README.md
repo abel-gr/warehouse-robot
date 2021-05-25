@@ -31,7 +31,7 @@ In the following sections, we explain a summary of the different features of the
 
 The Unity simulation consists of multiple robots that work collaboratively to collect boxes from a warehouse and transport them to the unloading area. To efficiently collect the boxes, scripts have been implemented scripts that allow the robots to be controlled as a swarm to assign to each task the optimal robot depending on some metrics and a training system that modifies the weights of the formula of assignment to get the optimal results. In addition, each robot is completely autonomous and has functions for calculating and following optimal routes, detection, and prevention of collisions, and **many more functionalities that can be read in the [section of the wiki dedicated exclusively to Unity](https://github.com/abel-gr/warehouse-robot/wiki/Unity-simulation)**. 
 
-<img src="https://github.com/abel-gr/warehouse-robot/blob/09cc06671cb7361b14a4d378ac390e9d0c55fa1a/Simulation/Unity/screenshots/gifs/over.gif" alt="UnitySimulation1" width="600"/>
+<img src="Simulation/Unity/screenshots/gifs/over.gif" alt="UnitySimulation1" width="600"/>
 
 ## Coordinated robot swarm
 
