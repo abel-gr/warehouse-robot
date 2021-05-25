@@ -25,7 +25,7 @@ Our robot works around a warehouse moving and organizing inventory. We have done
 
 Each robot is formed by a base capable of moving thanks to a set of wheels. This base carries a structure with an arm. The arm’s job will be to pick up the packages and drop them in a basket structure located near the arm, so it is able to carry more than one package at the same time. It has a GPS sensor so it is able to know where it is located at every moment, a camera to use computer vision techniques to recognize the texts of the boxes, and a remote wifi connection to receive tasks. We also have designed a website where the warehouse orders are stored, and a human worker can add manually and with his/her own voice orders to be processed by the robot swarm.
 
-In the following sections, we explain a summary of the different features of the robot, **but more information can be seen in the different pages of the repository wiki**.
+In the following sections, we explain a summary of the different features of the robot, **but more information can be seen in the different pages of the repository [wiki](https://github.com/abel-gr/warehouse-robot/wiki)**.
 
 # Unity Simulation [📖](https://github.com/abel-gr/warehouse-robot/wiki/Unity-simulation)
 
