@@ -1,5 +1,5 @@
 # Warehouse Worker
-**_The multifunction warehouse robot._**
+**_The autonomous robot for smart warehouses._**
 
 # Table of Contents
 
