@@ -127,11 +127,9 @@ See [Geometric approach to inverse kinematics](https://www.researchgate.net/publ
 
 We have coded a very easy-to-use library where a complex order for a robot is coded with just 8 lines. 
 
-<img src="../raw/master/Simulation/Coppelia/screenshots/demo_code.JPG" alt="demojpg" width="600"/>
+<img src="https://github.com/abel-gr/warehouse-robot/blob/2a2d66e6219ca14f4eae843bab8f46ae5a2457d9/Simulation/Coppelia/screenshots/demo_code.JPG" alt="demo" width="600"/>
 
 With this code we are telling our robot to do this specific order {TAKE 5241730 & 0530260 DELIVER TO DROP_ZONE_A, DROP_ZONE_B} as we can see, this means the robot has to take the packages with the id code 5241730 and 0530260 and deliver them to a specific drop zone.
-
-Demo code:
 
 ### Delivery Service
 
