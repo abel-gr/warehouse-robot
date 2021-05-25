@@ -41,7 +41,7 @@ The robots are assigned in a coordinated way to collect the different boxes from
 
 In addition, a script has been implemented that can be activated to carry out automatic training to search the weights that minimize the total time of the collection of boxes from the warehouse between all the robots. When the training mode is enabled after a certain number of orders are processed by the robots, the weights of the formula used to determine which robot is the most suitable for picking an order are modified in each iteration. It repeats the process numerous times and saves the optimal values that minimize the total order processing time in _PlayerPrefs_ so that they persist after execution and can be used again.
 
-![TrainingPlot](../raw/master/Simulation/Unity/screenshots/trainingPlot.png)
+<img src="https://github.com/abel-gr/warehouse-robot/blob/e9384674523039d8e63bd4f6b448ed78bc06db9c/Simulation/Unity/screenshots/trainingPlot.png" alt="TrainingPlot"/>
 
 If you want to add more robots to the swarm, all you have to do is to add the prefab of the robot that we have designed to the Unity scene all the times you want. All the scripts automatically detect in their start all the robots that are in the warehouse so there is no need to modify any line of code when adding new robots thanks to the scalable design we have made of our scripts.
 
@@ -106,8 +106,7 @@ CoppeliaSim is a realistic robotics simulator where you can develop robots from 
 
 ### Precise kinematics
 
-<img src="../raw/master/Simulation/Coppelia/screenshots/take_pack.gif" alt="Ramp" width="600"/>
-
+<img src="https://github.com/abel-gr/warehouse-robot/blob/e9384674523039d8e63bd4f6b448ed78bc06db9c/Simulation/Coppelia/screenshots/take_pack.gif" alt="TakePack" width="600"/>
 
 The arm of our robot has 4 axes, the minimum to be able to comfortably make the movement of picking up a box with a suction cup from the upper part, which is the one with the best grip, and placing it in the basket.
 
@@ -128,7 +127,7 @@ See [Geometric approach to inverse kinematics](https://www.researchgate.net/publ
 
 The robot can deliver specific packages to specific places due to its GPS-guided moving system, and his basket.
 
-<img src="../raw/master/Simulation/Coppelia/screenshots/demo.gif" alt="Ramp" width="600"/>
+<img src="https://github.com/abel-gr/warehouse-robot/blob/e9384674523039d8e63bd4f6b448ed78bc06db9c/Simulation/Coppelia/screenshots/demo.gif" alt="CSDEmo" width="600"/>
 
 # Website & Google APIs [📖](https://github.com/abel-gr/warehouse-robot/wiki/Website-&-Google-APIS "Website & Google APIs Wiki")
 
@@ -139,7 +138,7 @@ To make possible some of the functionalities of this website, several Google Clo
 
 The website offers a visual representation of the warehouse stock. As mentioned above, it also allows operators to create orders either manually with buttons and text dialogues or with their own voice.
 
-![Website](../raw/master/website/screenshots/web_general.png)
+<img src="https://github.com/abel-gr/warehouse-robot/blob/e9384674523039d8e63bd4f6b448ed78bc06db9c/website/screenshots/web_general.png" alt="Website" />
 
 ## Google APIs
 
@@ -151,7 +150,7 @@ To make possible many of the functionalities of the website, we have used some o
 
 The following diagram summarizes the modules of the warehouse website graphically:
 
-![WebScheme](../raw/master/website/screenshots/cloud%20scheme.png)
+<img src="https://github.com/abel-gr/warehouse-robot/blob/e9384674523039d8e63bd4f6b448ed78bc06db9c/website/screenshots/cloud%20scheme.png" alt="WebScheme"/>
 
 # Hardware & 3D design [📖](https://github.com/abel-gr/warehouse-robot/wiki/Hardware-&-3D-design "Hardware & 3D design Wiki")
 
@@ -172,27 +171,22 @@ These are some of the parts that form the robot:
 
 * Base & Basket:
 <img src="https://github.com/abel-gr/warehouse-robot/blob/04acbda1ea0180f17e8066a65f9a8585afba3a3b/imgs/3d/base.png" alt="3dBase" width="300"/>
-
 <img align="right" src="https://github.com/abel-gr/warehouse-robot/blob/04acbda1ea0180f17e8066a65f9a8585afba3a3b/imgs/3d/basket.png" alt="3dBasket" width="300"/>
 
 * Basecone & Shoulder plate:
 <img src="https://github.com/abel-gr/warehouse-robot/blob/04acbda1ea0180f17e8066a65f9a8585afba3a3b/imgs/3d/basecone.png" alt="3dbasecone" width="300"/>
-
 <img align="right" src="https://github.com/abel-gr/warehouse-robot/blob/04acbda1ea0180f17e8066a65f9a8585afba3a3b/imgs/3d/shoulderplate.png" alt="3dshoulderplate" width="300"/>
 
 * Shoulder shell & Forearm:
 <img src="https://github.com/abel-gr/warehouse-robot/blob/04acbda1ea0180f17e8066a65f9a8585afba3a3b/imgs/3d/shouldershell.png" alt="3dshouldershell" width="300"/>
-
 <img align="right" src="https://github.com/abel-gr/warehouse-robot/blob/04acbda1ea0180f17e8066a65f9a8585afba3a3b/imgs/3d/forearm.png" alt="3dforearm" width="300"/>
 
 * Elbow shell & Upper arm:
 <img src="https://github.com/abel-gr/warehouse-robot/blob/04acbda1ea0180f17e8066a65f9a8585afba3a3b/imgs/3d/elbowshell.png" alt="3delbowshell" width="300"/>
-
 <img align="right" src="https://github.com/abel-gr/warehouse-robot/blob/04acbda1ea0180f17e8066a65f9a8585afba3a3b/imgs/3d/upperarm.png" alt="3dupperarm" width="300"/>
 
 * Wirst shell & Shorter upper arm:
 <img src="https://github.com/abel-gr/warehouse-robot/blob/04acbda1ea0180f17e8066a65f9a8585afba3a3b/imgs/3d/wirstshell.png" alt="3dwirstshell" width="300"/>
-
 <img align="right" src="https://github.com/abel-gr/warehouse-robot/blob/04acbda1ea0180f17e8066a65f9a8585afba3a3b/imgs/3d/shorter_upperarm.png" alt="3dshorterupperarm" width="300"/>
 
 # Video
