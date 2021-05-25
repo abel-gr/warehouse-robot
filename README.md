@@ -102,7 +102,7 @@ When the robots detect that they have reached their maximum box load capacity, i
 
 ## Realistic Simulation
 
-CoppeliaSim is a realistic robotics simulator where you can develop robots from scratch. It also has a Python Api which you can use to bring intelligence to your robot. In our case we have combined Computer Vision and Robotics to create robot which is able to carry two packages at the same time, and identify them. Ideal for warehouses or factorys.
+CoppeliaSim is a realistic robotics simulator where you can develop robots from scratch. It also has a Python API which you can use to bring intelligence to your robot. In our case, we have combined Computer Vision and Robotics to create a robot that is able to carry two packages at the same time and identify them. Ideal for warehouses or factories.
 
 ### Precise kinematics
 
@@ -119,9 +119,19 @@ The Denavit-Hartenberg matrix of our arm is as follows:
 | 3    	| &theta;<sub>3</sub>	| 0  	| l3 	| 0     |
 | 4    	| &theta;<sub>4</sub>	| 0  	| l4  	|     	|
 
-As we have 4 angles and only 3 equations we cannot solve the system. So we must apply another method of inverse kinematics other than solving the system. We could use mechanical decoupling but in this case we prefer to use the geometric method.
+As we have 4 angles and only 3 equations we cannot solve the system. So we must apply another method of inverse kinematics other than solving the system. We could use mechanical decoupling but in this case, we prefer to use the geometric method.
 
 See [Geometric approach to inverse kinematics](https://www.researchgate.net/publication/228412878_Geometric_approach_to_inverse_kinematics_for_arm_manipulator) for more information about the geometrical model of a robotic arm.
+
+### Ready to use library
+
+We have coded a very easy-to-use library where a complex order for a robot is coded with just 8 lines. 
+
+<img src="../raw/master/Simulation/Coppelia/screenshots/demo_code.JPG" alt="demojpg" width="600"/>
+
+With this code we are telling our robot to do this specific order {TAKE 5241730 & 0530260 DELIVER TO DROP_ZONE_A, DROP_ZONE_B} as we can see, this means the robot has to take the packages with the id code 5241730 and 0530260 and deliver them to a specific drop zone.
+
+Demo code:
 
 ### Delivery Service
 
