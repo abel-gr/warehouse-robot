@@ -65,16 +65,24 @@ function convertToBase64(blob){
 }
 
 function createUploadBtn(blob) {
+
+	$("#recordingsList").html("");
+
 	convertToBase64(blob);
 	var url = URL.createObjectURL(blob);
 	var au = document.createElement('audio');
 	var li = document.createElement('li');
 
+
 	console.log("blob URL:",url);
 
 	au.controls = true;
 	au.src = url;
-	au.setAttribute('id', 'audioSrc')
+	au.setAttribute('id', 'audioSrc');
+	au.style.width = "90%";
+
+	li.style.width = "75%";
+
 	li.appendChild(au);
 
 	var upload = document.createElement('a');
