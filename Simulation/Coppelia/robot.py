@@ -20,6 +20,7 @@ class Image:
         return self.matrix[tup[0], tup[1]]
 
     def predict(self):
+        cv2.imwrite('pre-segment.jpg', self.matrix)
         s = OCR.segment(self.gray)
         if not hasattr(s, "__len__"):
             return ""
@@ -27,7 +28,7 @@ class Image:
         plt.figure(1)
         plt.imshow(s, 'gray')
         plt.show()
-        cv2.imwrite('imagen.png', s)
+        cv2.imwrite('post-segment.jpg', s)
         text = OCR.OCR(s)
 
         return text
@@ -54,13 +55,11 @@ class Package:
 
 
 class Sensors:
-    def __init__(self, clientID, cam, psensor, body, sensor_left, sensor_right):
+    def __init__(self, clientID, cam, psensor, body):
         self.clientID = clientID
         self.cam = cam
         self.psensor = psensor
         self.body = body
-        self.sensorl = sensor_left
-        self.sensorr = sensor_right
 
         print(psensor)
 
@@ -107,7 +106,6 @@ class Legs:
     def stop(self):
         simxSetJointTargetVelocity(self.clientID, self.left_wheel, 0.0, simx_opmode_streaming)
         simxSetJointTargetVelocity(self.clientID, self.right_wheel, 0.0, simx_opmode_streaming)
-
     pass
 
 
@@ -137,9 +135,6 @@ class Arm:
                                                                                 simx_opmode_blocking)
         return res
 
-    def get_tip(self):
-        return simxGetObjectPosition(self.clientID, self.tip, -1, simx_opmode_blocking)
-
     def move_to(self, coords):
         """
         l1 = 0.2659
@@ -158,8 +153,6 @@ class Arm:
             y = (coords[1] - p[1]) * 1000
             z = (coords[2]) * 1000
             cabGrados = 0
-            Axis5 = 90  # giro de la pinza es directo
-            Pinza = 110
             cabRAD = cabGrados * pi / 180  # angulo cabeceo en rad.
             Axis1 = atan2(y, x)
             M = sqrt(pow(x, 2) + pow(y, 2))
@@ -268,13 +261,11 @@ class Brain:  # It will be the main class where all the other class will be conn
         ret_codes[10], self.psensor = simxGetObjectHandle(self.clientID, 'Psensor', simx_opmode_blocking)
         ret_codes[11], self.backpack1 = simxGetObjectHandle(self.clientID, 'Backpack1', simx_opmode_blocking)
         ret_codes[12], self.backpack2 = simxGetObjectHandle(self.clientID, 'Backpack2', simx_opmode_blocking)
-        ret_codes[13], self.sensor_left = simxGetObjectHandle(self.clientID, 'sensor_left', simx_opmode_blocking)
-        ret_codes[14], self.sensor_right = simxGetObjectHandle(self.clientID, 'sensor_right', simx_opmode_blocking)
 
         assert not all(ret_codes)
         self.legs = Legs(self.clientID, self.left_wheel, self.right_wheel)
         self.arm = Arm(self.clientID, self.base, self.shoulder, self.elbow, self.wrist, self.arm_tip)
-        self.sensors = Sensors(self.clientID, self.cam, self.psensor, self.obj, self.sensor_left, self.sensor_right)
+        self.sensors = Sensors(self.clientID, self.cam, self.psensor, self.obj)
 
         self.boxes = [Package(1), Package(2)]
         self.check()
@@ -310,6 +301,7 @@ class Brain:  # It will be the main class where all the other class will be conn
         info = info.replace(' ', '')
         info = info.replace('O', '0')
         info = info.replace('\n', '')
+        
         print(info)
         self.boxes[slot-1].id = info
         self.take_package(coords, slot)
@@ -363,6 +355,7 @@ class Brain:  # It will be the main class where all the other class will be conn
         if slot == 2:
             pck = simxGetObjectPosition(self.clientID, self.backpack2, -1, simx_opmode_blocking)[1]
 
+        self.boxes[slot-1].id = ""
         self.check()
         pos = simxGetObjectPosition(self.clientID, self.base, -1, simx_opmode_blocking)[1]
 
@@ -442,18 +435,3 @@ class Brain:  # It will be the main class where all the other class will be conn
                 sleep(0.1 * np.abs(r))
                 self.legs.stop()
             self.check()
-
-
-"""
-Ideas que tengo:
-
-1. Legs Que el brain pueda llamar a una funcion "move" i le passe por parametro un vector 2d representando el vector 
-de movimiento que tiene que seguir el robot. Internamente esta funcion tratara con el objeto Legs que sera el 
-encargado de mover los joints de las ruedas a la velocidad adecuada para que el robot siga el vector especificado 
-
-2.Image, usar esta classe como si fuera una matriz numpy (internamente lo es). Para eso he creado el operador "[ ]", 
-de forma que podamos acceder a la matriz del objeto de manera fàcil. La idea és implementar funciones de Vision por 
-Computador dentro de la classe. Por ejemplo una funcion "Detect" que ejecute algun algoritmo de segmentación que 
-detecte si hay cajas en la imagen, si hay la línea del suelo que haya que seguir etc. 
-
-"""
