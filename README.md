@@ -29,7 +29,7 @@ In the following sections, we explain a summary of the different features of the
 
 # Unity Simulation [📖](https://github.com/abel-gr/warehouse-robot/wiki/Unity-simulation)
 
-The Unity simulation consists of multiple robots that work collaboratively to collect boxes from a warehouse and transport them to the unloading area. To efficiently collect the boxes, scripts have been implemented scripts that allow the robots to be controlled as a swarm to assign to each task the optimal robot depending on some metrics and a training system that modifies the weights of the formula of assignment to get the optimal results. In addition, each robot is completely autonomous and has functions for calculating and following optimal routes, detection, and prevention of collisions, and **many more functionalities that can be read in the [section of the wiki dedicated exclusively to Unity](Unity-simulation)**.
+The Unity simulation consists of multiple robots that work collaboratively to collect boxes from a warehouse and transport them to the unloading area. To efficiently collect the boxes, scripts have been implemented scripts that allow the robots to be controlled as a swarm to assign to each task the optimal robot depending on some metrics and a training system that modifies the weights of the formula of assignment to get the optimal results. In addition, each robot is completely autonomous and has functions for calculating and following optimal routes, detection, and prevention of collisions, and **many more functionalities that can be read in the [section of the wiki dedicated exclusively to Unity](https://github.com/abel-gr/warehouse-robot/wiki/Unity-simulation)**. 
 
 <img src="https://github.com/abel-gr/warehouse-robot/blob/09cc06671cb7361b14a4d378ac390e9d0c55fa1a/Simulation/Unity/screenshots/gifs/over.gif" alt="UnitySimulation1" width="600"/>
 
@@ -47,7 +47,7 @@ If you want to add more robots to the swarm, all you have to do is to add the pr
 
 ## Nodes with a single direction of circulation
 
-The warehouse is mapped as a directed graph. To make the warehouse instantly scalable without the need to make changes to existing systems, the information of the nodes is summarized in 4 simple variables: 2 integers and 2 booleans. The two integers symbolize the set of nodes to which each node belongs and is connected, and the two booleans indicate whether the X and Z direction to be followed at that node is positive or negative. In this way, the edges are not really saved anywhere, but our algorithm knows quickly and efficiently which nodes are connected, and which directions those connections are allowed. There is more information about these four variables in the [wiki section of the Warehouse_node.cs script](Unity-simulation#Warehouse_nodecs).
+The warehouse is mapped as a directed graph. To make the warehouse instantly scalable without the need to make changes to existing systems, the information of the nodes is summarized in 4 simple variables: 2 integers and 2 booleans. The two integers symbolize the set of nodes to which each node belongs and is connected, and the two booleans indicate whether the X and Z direction to be followed at that node is positive or negative. In this way, the edges are not really saved anywhere, but our algorithm knows quickly and efficiently which nodes are connected, and which directions those connections are allowed. There is more information about these four variables in the [wiki section of the Warehouse_node.cs script](https://github.com/abel-gr/warehouse-robot/wiki/Unity-simulation#Warehouse_nodecs).
 
 As a result of implementing this system, the generation of edges of the nodes is completely automated and scalable, and it also incorporates into the warehouse that the nodes have a single direction of circulation, avoiding possible head-on collisions between robots.
 
@@ -63,7 +63,7 @@ All robots have scripts for calculating optimal routes between the different nod
 
 <img src="https://github.com/abel-gr/warehouse-robot/blob/09cc06671cb7361b14a4d378ac390e9d0c55fa1a/Simulation/Unity/screenshots/gifs/route.gif" alt="Route" width="600"/>
 
-Each robot is implemented to be able to work independently and alone in case the swarm did not exist. What the swarm script really does is, once it has determined which robot should be assigned to a task and a location, it calls the robot script's own functions. When it assigns a robot to pick up an order, it changes the robot status to _OnWayToPick_ to ensure that it does not accept any other tasks until it is finished (more information about this process in the [Warehouse_orders.cs section](Unity-simulation#Warehouse_orderscs) and the [Robot.cs section](Unity-simulation#Robotcs)).
+Each robot is implemented to be able to work independently and alone in case the swarm did not exist. What the swarm script really does is, once it has determined which robot should be assigned to a task and a location, it calls the robot script's own functions. When it assigns a robot to pick up an order, it changes the robot status to _OnWayToPick_ to ensure that it does not accept any other tasks until it is finished (more information about this process in the [Warehouse_orders.cs section](https://github.com/abel-gr/warehouse-robot/wiki/Unity-simulation#Warehouse_orderscs) and the [Robot.cs section](https://github.com/abel-gr/warehouse-robot/wiki/Unity-simulation#Robotcs)). 
 
 Proximity sensors have been simulated through triggers and box colliders that allow robots to stop when they detect that they have a robot in front of them. In addition, they also stop giving priority to the robots that they detect on their right. Head-on collisions cannot occur because all nodes have a single direction of driving.
 
@@ -73,11 +73,11 @@ The robot also obtains the angle between its direction and the vector of the loc
 
 <img src="https://github.com/abel-gr/warehouse-robot/blob/09cc06671cb7361b14a4d378ac390e9d0c55fa1a/Simulation/Unity/screenshots/gifs/robotRotation.gif" alt="Robot_rotation" width="600"/>
 
-For more realism, servomotors and wheels have also been simulated to rotate depending on the same speed variable at which the robot moves, so that the faster the robot moves, the faster its wheels also rotate. You can find extra information about the operation of the wheels and their safety lock conditions in the [section of the Robot_wheels.cs script](Unity-simulation#Robot_wheelscs).
+For more realism, servomotors and wheels have also been simulated to rotate depending on the same speed variable at which the robot moves, so that the faster the robot moves, the faster its wheels also rotate. You can find extra information about the operation of the wheels and their safety lock conditions in the [section of the Robot_wheels.cs script](https://github.com/abel-gr/warehouse-robot/wiki/Unity-simulation#Robot_wheelscs). 
 
 <img src="https://github.com/abel-gr/warehouse-robot/blob/09cc06671cb7361b14a4d378ac390e9d0c55fa1a/Simulation/Unity/screenshots/gifs/wheels.gif" alt="Wheels" width="600"/>
 
-Each robot has a state that allows the other scripts to know what they can and cannot do with them, as well as the robot itself blocks or allows certain actions in each state. For example, the robotic arm is locked in all states except in the _PickingUp_ state. The robot can only receive new tasks in the _Available_ state. Also, in the _PickingUp_, _RampGoingDown_, _Unloading_, and _RampGoingUp_ states, the rotation of the robot and wheels is automatically locked. For more information about the robot states, its safety restrictions, and its transitions, you can refer to the [Robot.cs section](Unity-simulation#Robotcs).
+Each robot has a state that allows the other scripts to know what they can and cannot do with them, as well as the robot itself blocks or allows certain actions in each state. For example, the robotic arm is locked in all states except in the _PickingUp_ state. The robot can only receive new tasks in the _Available_ state. Also, in the _PickingUp_, _RampGoingDown_, _Unloading_, and _RampGoingUp_ states, the rotation of the robot and wheels is automatically locked. For more information about the robot states, its safety restrictions, and its transitions, you can refer to the [Robot.cs section](https://github.com/abel-gr/warehouse-robot/wiki/Unity-simulation#Robotcs).
 
 The robot is highly customizable and most of its variables can be modified directly from the Unity inspector, including its speed of movement, its speed of rotation, and its maximum load capacity among others.
 
@@ -87,13 +87,13 @@ A fully scalable robotic arm control script has been designed so all the desired
 
 A simulation of a pneumatic actuator has been incorporated that is capable of picking up boxes and storing them into the robot basket.
 
-More information about the robotic arm and the actuator can be found on the [Robot_arm.cs section](Unity-simulation#Robot_armcs) and the [Robot_actuator.cs section](Unity-simulation#Robot_actuatorcs).
+More information about the robotic arm and the actuator can be found on the [Robot_arm.cs section](https://github.com/abel-gr/warehouse-robot/wiki/Unity-simulation#Robot_armcs) and the [Robot_actuator.cs section](https://github.com/abel-gr/warehouse-robot/wiki/Unity-simulation#Robot_actuatorcs).
 
 <img src="https://github.com/abel-gr/warehouse-robot/blob/09cc06671cb7361b14a4d378ac390e9d0c55fa1a/Simulation/Unity/screenshots/gifs/arm.gif" alt="Arm" width="600"/>
 
 ## Unloading ramp
 
-When the robots detect that they have reached their maximum box load capacity, if they are in the _Available_ state, they automatically change their state to _OnWayToDrop_ and go to the unloading zone. There, the robots unload the boxes smoothly with its rotatable ramp on a conveyor belt that takes them to a large container. You can read much more detailed information about this process and robot state changes in the [wiki section of the Robot.cs script](Unity-simulation#Robotcs).
+When the robots detect that they have reached their maximum box load capacity, if they are in the _Available_ state, they automatically change their state to _OnWayToDrop_ and go to the unloading zone. There, the robots unload the boxes smoothly with its rotatable ramp on a conveyor belt that takes them to a large container. You can read much more detailed information about this process and robot state changes in the [wiki section of the Robot.cs script](https://github.com/abel-gr/warehouse-robot/wiki/Unity-simulation#Robotcs).
 
 <img src="https://github.com/abel-gr/warehouse-robot/blob/09cc06671cb7361b14a4d378ac390e9d0c55fa1a/Simulation/Unity/screenshots/gifs/ramp.gif" alt="Ramp" width="600"/>
 
