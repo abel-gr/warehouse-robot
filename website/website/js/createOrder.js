@@ -1,10 +1,10 @@
 
 
-function saveOrderToDB(data){
+function saveOrderToDB(sID){
 
     try {
 
-        var dID = parseInt(data["shelfID"]);
+        var dID = parseInt(sID);
         var shelf_gID = Math.floor(dID / shelves_per_section);
 
         var sectionDir = (shelf_gID + 1).toString();
@@ -66,7 +66,7 @@ function addOrderWithQuantity(id, destinationID, productID, quantity){
         $("#section_ul_" + sectionid).append(elemento);
     }
 
-    saveOrderToDB(data);
+    saveOrderToDB(id);
 }
 
 
