@@ -1,0 +1,42 @@
+exports.SpeechToText = async (req, res) => {
+
+res.set('Access-Control-Allow-Origin', '*');
+res.set('Access-Control-Allow-Credentials', 'true');
+
+if (req.method === 'OPTIONS') {
+
+  res.set('Access-Control-Allow-Methods', 'POST');
+  res.set('Access-Control-Allow-Headers', 'Content-Type');
+  res.set('Access-Control-Max-Age', '3600');
+  res.status(204).send('');
+  
+} else {
+    const speech = require('@google-cloud/speech');
+    const client = new speech.SpeechClient();
+
+    const encoding = 'LINEAR16';
+    const sampleRateHertz = 48000;
+
+    const config = {
+      encoding: encoding,
+      sampleRateHertz: sampleRateHertz,
+      languageCode: req.body.lan,
+    };
+
+    const audio = {
+      content: req.body.audio,
+    };
+
+    const request = {
+      config: config,
+      audio: audio,
+    };
+
+    const [response] = await client.recognize(request);
+    const transcription = response.results
+      .map(result => result.alternatives[0].transcript)
+      .join('\n');
+
+    res.send(transcription);
+  }
+};
