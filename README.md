@@ -99,16 +99,31 @@ When the robots detect that they have reached their maximum box load capacity, i
 
 # Coppelia Simulation [📖](https://github.com/abel-gr/warehouse-robot/wiki/Coppelia-simulation "Coppelia Simulation Wiki")
 
+## Optical Character Recognition for box recognition
+
+When we receive the image from the camera we process it to find out the identification number from the box. We crop and binarize the image and then, using a labeling algorithm 
+with connectivity to 8, we assign a number to each region:
+
+![LabelingResult](Simulation/Coppelia/screenshots/OCR_labelingResult.png)
+
+Since we have the image in which each letter or number has a region with a unique number, we can easily find a bounding box for each letter, segment them and crop them:
+
+![Segmentation](Simulation/Coppelia/screenshots/OCR_segmentation1.png)
+
+Now each cropped image is passed to a multi-layer perceptron that we have trained ourselves (and serialized, so that the training process only needs to be done once). We get the 
+class it belongs to, and each class belongs to a letter or number so we get the ID of the box in string format.
 
 ## Realistic Simulation
 
-CoppeliaSim is a realistic robotics simulator where you can develop robots from scratch. It also has a Python API which you can use to bring intelligence to your robot. In our case, we have combined Computer Vision and Robotics to create a robot that is able to carry two packages at the same time and identify them. Ideal for warehouses or factories.
+CoppeliaSim is a realistic robotics simulator where you can develop robots from scratch. It also has a Python API which you can use to bring intelligence to your robot. In our 
+case, we have combined Computer Vision and Robotics to create a robot that is able to carry two packages at the same time and identify them. Ideal for warehouses or factories.
 
 ### Precise kinematics
 
 <img src="Simulation/Coppelia/screenshots/take_pack.gif" alt="TakePack" width="600"/>
 
-The arm of our robot has 4 axes, the minimum to be able to comfortably make the movement of picking up a box with a suction cup from the upper part, which is the one with the best grip, and placing it in the basket.
+The arm of our robot has 4 axes, the minimum to be able to comfortably make the movement of picking up a box with a suction cup from the upper part, which is the one with the 
+best grip, and placing it in the basket.
 
 The Denavit-Hartenberg matrix of our arm is as follows:
 
