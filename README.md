@@ -154,12 +154,16 @@ The robot can deliver specific packages to specific places due to its GPS-guided
 
 # Website & Google APIs [📖](https://github.com/abel-gr/warehouse-robot/wiki/Website-&-Google-APIS "Website & Google APIs Wiki")
 
-A web page has also been created for this project in order to manage the stock of the warehouse where the swarm operates. Apart from this, you can also create orders for the robots.
-To make possible some of the functionalities of this website, several Google Cloud APIs have been used.
+A website has been created for this project in order to manage the stock of the warehouse where the swarm operates. You can also create orders for the robots with your own voice or with a web interface that we have designed.
+
+To make possible some of the functionalities of this website, several _Google Cloud APIs_ have been used. To publish the web we have used the _Firebase Hosting_ service.
+
+🌍 [_The WarehouseWorker Control Web_](https://warehousewaiter.web.app)
 
 ## Website
 
-The website offers a visual representation of the warehouse stock. As mentioned above, it also allows operators to create orders either manually with buttons and text dialogues or with their own voice.
+The website offers a visual representation of the warehouse stock. As mentioned above, it also allows operators to create orders either manually with buttons and text dialogues 
+or with their own voice.
 
 <img src="website/screenshots/web_general.png" alt="Website" />
 
