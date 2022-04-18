@@ -8,4 +8,4 @@ You have 2 options to run it:
 
     * The fastest option is to [download the unitypackage file](warehouse_simulation_export.unitypackage) and import it into a new Unity scene. That will import the entire project, including the code, the warehouse, and the robots. Then you can play the scene or build it to compile and export your modifications.
 
-    * If you do not want to import the entire project, you have the option to download the specific parts of the project you want from the [Unity project folder](/Warehouse%20simulation).
+    * If you do not want to import the entire project, you have the option to download the specific parts of the project you want from the [Unity project folder](Warehouse%20simulation).
