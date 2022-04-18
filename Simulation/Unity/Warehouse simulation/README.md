@@ -1,6 +1,6 @@
 # Unity simulation
 
-The Unity simulation consists of multiple robots that work collaboratively to collect boxes from a warehouse and transport them to the unloading area. To efficiently collect the boxes, it have been implemented scripts that allow the robots to be controlled as a swarm to assign to each task the optimal robot depending on some metrics and a training system that modifies the weights of the formula of assignment to get the optimal results. In addition, each robot is completely autonomous and has functions for calculating and following optimal routes, detection and prevention of collisions and many more functionalities that can be read below.
+The Unity simulation consists of multiple robots that work collaboratively to collect boxes from a warehouse and transport them to the unloading area. To efficiently collect the boxes, scripts have been implemented that allow the robots to be controlled as a swarm to assign to each task the optimal robot depending on some metrics and a training system that modifies the weights of the formula of assignment to get the optimal results. In addition, each robot is completely autonomous and has functions for calculating and following optimal routes, detection and prevention of collisions and many more functionalities that can be read below.
 
 **Below the summary of the functionalities you will find more detailed information about each of the implemented scripts.**
 
